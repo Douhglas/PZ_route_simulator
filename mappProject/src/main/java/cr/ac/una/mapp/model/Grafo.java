@@ -12,7 +12,7 @@ public class Grafo {
     @Expose
     private List<Vertice> vertices;
     @Expose
-    private List<List<Integer>> matrix;  // Usamos ArrayList para la matriz de adyacencia
+    private List<List<Integer>> matrix;  
     @Expose
     public List<List<Arista>> matrizAdyacencia;
     @Expose
@@ -115,16 +115,16 @@ public class Grafo {
         return new ArrayList<>();  // Si no hay camino
     }
 
-    public List<Integer> floydWarshall(int origen, int destino) {
+    public List<Arista> floydWarshall(int origen, int destino) {
         int numVertices = matrizAdyacencia.size();
         int[][] dist = new int[numVertices][numVertices];
-        predecesor = new int[numVertices][numVertices]; 
+        predecesor = new int[numVertices][numVertices];
 
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
                 if (i == j) {
-                    dist[i][j] = 0; 
-                    predecesor[i][j] = -1; 
+                    dist[i][j] = 0;
+                    predecesor[i][j] = -1;
                 } else {
                     dist[i][j] = Integer.MAX_VALUE;
                     predecesor[i][j] = -1;
@@ -135,8 +135,8 @@ public class Grafo {
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
                 if (matrizAdyacencia.get(i).get(j) != null) {
-                    dist[i][j] = matrizAdyacencia.get(i).get(j).getPeso(); 
-                    predecesor[i][j] = i; 
+                    dist[i][j] = matrizAdyacencia.get(i).get(j).getPeso();
+                    predecesor[i][j] = i;
                 }
             }
         }
@@ -148,13 +148,16 @@ public class Grafo {
                     if (dist[i][k] != Integer.MAX_VALUE && dist[k][j] != Integer.MAX_VALUE
                             && dist[i][j] > dist[i][k] + dist[k][j]) {
                         dist[i][j] = dist[i][k] + dist[k][j];
-                        predecesor[i][j] = k; 
+                        predecesor[i][j] = k;
                     }
                 }
             }
         }
-        
-        return obtenerCamino(origen, destino);
+        List<Integer> camino = obtenerCamino(origen, destino);
+        if(camino == null){
+            return null;
+        }
+        return crearCamino(camino);
     }
 
     public List<Integer> obtenerCamino(int origenId, int destinoId) {

@@ -1,6 +1,7 @@
 package cr.ac.una.mapp.controller;
 
 import cr.ac.una.mapp.model.Arista; 
+import cr.ac.una.mapp.model.Carro;
 import cr.ac.una.mapp.model.Grafo;
 import cr.ac.una.mapp.model.Vertice;
 import cr.ac.una.mapp.util.AppManager;
@@ -102,7 +103,7 @@ public class MainMapController extends Controller implements Initializable {
                 //e iniciar la animacion
                 //cuando se inicia la animacion y llega a un nodo entonces se recalcula la ruta y si da otra entonces marcarla con otro color
                 //en el grafo y mostrarla
-                System.out.println("click en circulo : " );
+                System.out.println("click en circulo : ");
                 if (click == 0) {
                     origen = (Vertice) circle.getUserData();
                     click++;
@@ -110,8 +111,14 @@ public class MainMapController extends Controller implements Initializable {
                 } else if (click == 1 && origen != (Vertice) circle.getUserData()) {
                     destino = (Vertice) circle.getUserData();
                     click = 0;
-                    List<Integer> camino = grafo.floydWarshall(origen.getId(), destino.getId());
-                    drawPath(grafo.crearCamino(camino));
+                    List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
+                    if (camino == null) {
+                        System.out.println("No existe camino");
+                    } else {
+                        drawPath(camino);
+                        Carro carro = new Carro(root);
+                        carro.crearSimulacion(camino.get(0), 3);
+                    }
                 }
 
             } else if (e.getButton() == MouseButton.SECONDARY) {

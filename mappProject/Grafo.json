@@ -2,33 +2,43 @@
   "vertices": [
     {
       "id": 0,
-      "x": 283.0,
-      "y": 62.0
+      "x": 334.0,
+      "y": 169.0
     },
     {
       "id": 1,
-      "x": 216.0,
-      "y": 196.0
+      "x": 429.0,
+      "y": 304.0
     },
     {
       "id": 2,
-      "x": 284.0,
-      "y": 276.0
+      "x": 479.0,
+      "y": 400.0
     },
     {
       "id": 3,
-      "x": 434.0,
-      "y": 211.0
+      "x": 440.0,
+      "y": 476.0
     },
     {
       "id": 4,
-      "x": 306.0,
-      "y": 172.0
+      "x": 363.0,
+      "y": 445.0
     },
     {
       "id": 5,
-      "x": 394.0,
-      "y": 116.0
+      "x": 279.0,
+      "y": 408.0
+    },
+    {
+      "id": 6,
+      "x": 268.0,
+      "y": 321.0
+    },
+    {
+      "id": 7,
+      "x": 184.0,
+      "y": 303.0
     }
   ],
   "matrizAdyacencia": [
@@ -37,13 +47,83 @@
       {
         "origen": {
           "id": 0,
-          "x": 283.0,
-          "y": 62.0
+          "x": 334.0,
+          "y": 169.0
         },
         "destino": {
           "id": 1,
-          "x": 216.0,
-          "y": 196.0
+          "x": 429.0,
+          "y": 304.0
+        },
+        "peso": 5,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      {
+        "origen": {
+          "id": 1,
+          "x": 429.0,
+          "y": 304.0
+        },
+        "destino": {
+          "id": 2,
+          "x": 479.0,
+          "y": 400.0
+        },
+        "peso": 7,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      {
+        "origen": {
+          "id": 1,
+          "x": 429.0,
+          "y": 304.0
+        },
+        "destino": {
+          "id": 4,
+          "x": 363.0,
+          "y": 445.0
+        },
+        "peso": 777,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      {
+        "origen": {
+          "id": 2,
+          "x": 479.0,
+          "y": 400.0
+        },
+        "destino": {
+          "id": 3,
+          "x": 440.0,
+          "y": 476.0
         },
         "peso": 6,
         "isClosed": false,
@@ -57,182 +137,144 @@
       null
     ],
     [
+      null,
+      null,
+      null,
+      null,
       {
         "origen": {
-          "id": 1,
-          "x": 216.0,
-          "y": 196.0
+          "id": 3,
+          "x": 440.0,
+          "y": 476.0
         },
         "destino": {
-          "id": 0,
-          "x": 283.0,
-          "y": 62.0
+          "id": 4,
+          "x": 363.0,
+          "y": 445.0
+        },
+        "peso": 33,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "origen": {
+          "id": 4,
+          "x": 363.0,
+          "y": 445.0
+        },
+        "destino": {
+          "id": 5,
+          "x": 279.0,
+          "y": 408.0
+        },
+        "peso": 8,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      {
+        "origen": {
+          "id": 5,
+          "x": 279.0,
+          "y": 408.0
+        },
+        "destino": {
+          "id": 4,
+          "x": 363.0,
+          "y": 445.0
+        },
+        "peso": 7,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      {
+        "origen": {
+          "id": 5,
+          "x": 279.0,
+          "y": 408.0
+        },
+        "destino": {
+          "id": 6,
+          "x": 268.0,
+          "y": 321.0
+        },
+        "peso": 99,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      {
+        "origen": {
+          "id": 6,
+          "x": 268.0,
+          "y": 321.0
+        },
+        "destino": {
+          "id": 4,
+          "x": 363.0,
+          "y": 445.0
+        },
+        "peso": 88,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      null,
+      {
+        "origen": {
+          "id": 6,
+          "x": 268.0,
+          "y": 321.0
+        },
+        "destino": {
+          "id": 7,
+          "x": 184.0,
+          "y": 303.0
         },
         "peso": 6,
         "isClosed": false,
         "time": 0,
         "longitud": 0,
         "nivelTrafico": 1
-      },
-      null,
-      {
-        "origen": {
-          "id": 1,
-          "x": 216.0,
-          "y": 196.0
-        },
-        "destino": {
-          "id": 2,
-          "x": 284.0,
-          "y": 276.0
-        },
-        "peso": 5,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
-      },
-      null,
-      {
-        "origen": {
-          "id": 1,
-          "x": 216.0,
-          "y": 196.0
-        },
-        "destino": {
-          "id": 4,
-          "x": 306.0,
-          "y": 172.0
-        },
-        "peso": 3,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
-      },
-      null
-    ],
-    [
-      null,
-      {
-        "origen": {
-          "id": 2,
-          "x": 284.0,
-          "y": 276.0
-        },
-        "destino": {
-          "id": 1,
-          "x": 216.0,
-          "y": 196.0
-        },
-        "peso": 5,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
-      },
-      null,
-      null,
-      {
-        "origen": {
-          "id": 2,
-          "x": 284.0,
-          "y": 276.0
-        },
-        "destino": {
-          "id": 4,
-          "x": 306.0,
-          "y": 172.0
-        },
-        "peso": 2,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
-      },
-      null
-    ],
-    [
-      null,
-      null,
-      null,
-      null,
-      {
-        "origen": {
-          "id": 3,
-          "x": 434.0,
-          "y": 211.0
-        },
-        "destino": {
-          "id": 4,
-          "x": 306.0,
-          "y": 172.0
-        },
-        "peso": 9,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
-      },
-      {
-        "origen": {
-          "id": 3,
-          "x": 434.0,
-          "y": 211.0
-        },
-        "destino": {
-          "id": 5,
-          "x": 394.0,
-          "y": 116.0
-        },
-        "peso": 3,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
       }
     ],
     [
       null,
       null,
-      null,
-      {
-        "origen": {
-          "id": 4,
-          "x": 306.0,
-          "y": 172.0
-        },
-        "destino": {
-          "id": 3,
-          "x": 434.0,
-          "y": 211.0
-        },
-        "peso": 4,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
-      },
-      null,
-      {
-        "origen": {
-          "id": 4,
-          "x": 306.0,
-          "y": 172.0
-        },
-        "destino": {
-          "id": 5,
-          "x": 394.0,
-          "y": 116.0
-        },
-        "peso": 10,
-        "isClosed": false,
-        "time": 0,
-        "longitud": 0,
-        "nivelTrafico": 1
-      }
-    ],
-    [
       null,
       null,
       null,
@@ -245,64 +287,13 @@
     {
       "origen": {
         "id": 0,
-        "x": 283.0,
-        "y": 62.0
+        "x": 334.0,
+        "y": 169.0
       },
       "destino": {
         "id": 1,
-        "x": 216.0,
-        "y": 196.0
-      },
-      "peso": 6,
-      "isClosed": false,
-      "time": 0,
-      "longitud": 0,
-      "nivelTrafico": 1
-    },
-    {
-      "origen": {
-        "id": 1,
-        "x": 216.0,
-        "y": 196.0
-      },
-      "destino": {
-        "id": 0,
-        "x": 283.0,
-        "y": 62.0
-      },
-      "peso": 6,
-      "isClosed": false,
-      "time": 0,
-      "longitud": 0,
-      "nivelTrafico": 1
-    },
-    {
-      "origen": {
-        "id": 1,
-        "x": 216.0,
-        "y": 196.0
-      },
-      "destino": {
-        "id": 2,
-        "x": 284.0,
-        "y": 276.0
-      },
-      "peso": 5,
-      "isClosed": false,
-      "time": 0,
-      "longitud": 0,
-      "nivelTrafico": 1
-    },
-    {
-      "origen": {
-        "id": 2,
-        "x": 284.0,
-        "y": 276.0
-      },
-      "destino": {
-        "id": 1,
-        "x": 216.0,
-        "y": 196.0
+        "x": 429.0,
+        "y": 304.0
       },
       "peso": 5,
       "isClosed": false,
@@ -313,15 +304,15 @@
     {
       "origen": {
         "id": 1,
-        "x": 216.0,
-        "y": 196.0
+        "x": 429.0,
+        "y": 304.0
       },
       "destino": {
-        "id": 4,
-        "x": 306.0,
-        "y": 172.0
+        "id": 2,
+        "x": 479.0,
+        "y": 400.0
       },
-      "peso": 3,
+      "peso": 7,
       "isClosed": false,
       "time": 0,
       "longitud": 0,
@@ -330,32 +321,15 @@
     {
       "origen": {
         "id": 2,
-        "x": 284.0,
-        "y": 276.0
-      },
-      "destino": {
-        "id": 4,
-        "x": 306.0,
-        "y": 172.0
-      },
-      "peso": 2,
-      "isClosed": false,
-      "time": 0,
-      "longitud": 0,
-      "nivelTrafico": 1
-    },
-    {
-      "origen": {
-        "id": 4,
-        "x": 306.0,
-        "y": 172.0
+        "x": 479.0,
+        "y": 400.0
       },
       "destino": {
         "id": 3,
-        "x": 434.0,
-        "y": 211.0
+        "x": 440.0,
+        "y": 476.0
       },
-      "peso": 4,
+      "peso": 6,
       "isClosed": false,
       "time": 0,
       "longitud": 0,
@@ -364,15 +338,32 @@
     {
       "origen": {
         "id": 3,
-        "x": 434.0,
-        "y": 211.0
+        "x": 440.0,
+        "y": 476.0
       },
       "destino": {
         "id": 4,
-        "x": 306.0,
-        "y": 172.0
+        "x": 363.0,
+        "y": 445.0
       },
-      "peso": 9,
+      "peso": 33,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 5,
+        "x": 279.0,
+        "y": 408.0
+      },
+      "destino": {
+        "id": 4,
+        "x": 363.0,
+        "y": 445.0
+      },
+      "peso": 7,
       "isClosed": false,
       "time": 0,
       "longitud": 0,
@@ -381,15 +372,15 @@
     {
       "origen": {
         "id": 4,
-        "x": 306.0,
-        "y": 172.0
+        "x": 363.0,
+        "y": 445.0
       },
       "destino": {
         "id": 5,
-        "x": 394.0,
-        "y": 116.0
+        "x": 279.0,
+        "y": 408.0
       },
-      "peso": 10,
+      "peso": 8,
       "isClosed": false,
       "time": 0,
       "longitud": 0,
@@ -397,16 +388,67 @@
     },
     {
       "origen": {
-        "id": 3,
-        "x": 434.0,
-        "y": 211.0
+        "id": 5,
+        "x": 279.0,
+        "y": 408.0
       },
       "destino": {
-        "id": 5,
-        "x": 394.0,
-        "y": 116.0
+        "id": 6,
+        "x": 268.0,
+        "y": 321.0
       },
-      "peso": 3,
+      "peso": 99,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 6,
+        "x": 268.0,
+        "y": 321.0
+      },
+      "destino": {
+        "id": 4,
+        "x": 363.0,
+        "y": 445.0
+      },
+      "peso": 88,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 1,
+        "x": 429.0,
+        "y": 304.0
+      },
+      "destino": {
+        "id": 4,
+        "x": 363.0,
+        "y": 445.0
+      },
+      "peso": 777,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 6,
+        "x": 268.0,
+        "y": 321.0
+      },
+      "destino": {
+        "id": 7,
+        "x": 184.0,
+        "y": 303.0
+      },
+      "peso": 6,
       "isClosed": false,
       "time": 0,
       "longitud": 0,
