@@ -377,11 +377,11 @@ public class MainMapController extends Controller implements Initializable {
 
     @FXML
     void onActionCalcularDjikstra(ActionEvent event) {
-
+        grafo.isUsingDijkstra = true;
         List<Arista> caminoAristas = grafo.dijkstra(origenDjikstra, destinoDjikstra);
-
+        System.out.println("Dijkstra");
         if (caminoAristas == null) {
-            System.out.println("No existe camino");
+            System.out.println("No existe camino ");
         } else {
             drawPath(caminoAristas);
             carro.setOrigen(origen.getId());
@@ -393,14 +393,16 @@ public class MainMapController extends Controller implements Initializable {
 
     @FXML
     void onActionCalcularFloyd(ActionEvent event) {
+        grafo.isUsingDijkstra = false;
         List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
+        System.out.println("Floyd");
         if (camino == null) {
             System.out.println("No existe camino");
         } else {
             drawPath(camino);
             carro.setOrigen(origen.getId());
             carro.setDestino(destino.getId());
-            carro.crearSimulacion(camino.get(0), 3);
+            carro.IniciarRecorrido(camino);
 
             AppContext.getInstance().set("caminoInicial", camino);
         }

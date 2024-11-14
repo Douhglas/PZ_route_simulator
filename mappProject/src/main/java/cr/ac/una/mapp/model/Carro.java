@@ -8,6 +8,7 @@ import java.util.List;
 
 import cr.ac.una.mapp.controller.MainMapController;
 import cr.ac.una.mapp.util.AppContext;
+import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -42,6 +43,8 @@ public class Carro {
     private List<Arista> caminoRecorrido;
 
     public Carro(AnchorPane anchorPane) {
+        caminoOriginal =  new ArrayList<>();
+        caminoRecorrido =  new ArrayList<>();
         this.anchorPane = anchorPane;
         carroImageView.setFitWidth(40);
         carroImageView.setFitHeight(35);
