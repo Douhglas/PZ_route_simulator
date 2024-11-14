@@ -54,6 +54,11 @@ public class MainMapController extends Controller implements Initializable {
     private Line arrowB;
     private Vertice destino;
     private Integer click = 0;
+    
+    
+    private Carro carro = new Carro(root);
+    private List<Arista> caminoActual;
+    private List<List<Arista>> caminosRecorridos; 
     @FXML
     private Button floydMarshallAplicar;
 
@@ -69,8 +74,12 @@ public class MainMapController extends Controller implements Initializable {
     public void initialize() {
         //elimianr lo que haya limpiar todo y despues cargar los nodos
         origen = new Vertice();
+        carro.setAnchorPane(root);
+        
+        
         grafo = AppManager.getInstance().cargar();
-
+        carro.setGrafo(grafo);
+        
         if (grafo != null && !grafo.getVertices().isEmpty()) {
            for(Vertice vertice : grafo.getVertices()){
                colocarCirculo(vertice);
@@ -98,15 +107,11 @@ public class MainMapController extends Controller implements Initializable {
 
         circle.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
-                //seleccionar nodo A y B para la ruta una vez seleccionados empezar ruta segun ruta elegida
-                //al seleccionar dos se debe pintar la ruta 
-                //e iniciar la animacion
-                //cuando se inicia la animacion y llega a un nodo entonces se recalcula la ruta y si da otra entonces marcarla con otro color
-                //en el grafo y mostrarla
-                System.out.println("click en circulo : ");
                 if (click == 0) {
+                    
                     origen = (Vertice) circle.getUserData();
                     click++;
+                    System.out.println("click en nodo : " + origen.getId());
 
                 } else if (click == 1 && origen != (Vertice) circle.getUserData()) {
                     destino = (Vertice) circle.getUserData();
@@ -116,7 +121,8 @@ public class MainMapController extends Controller implements Initializable {
                         System.out.println("No existe camino");
                     } else {
                         drawPath(camino);
-                        Carro carro = new Carro(root);
+                        carro.setOrigen(origen.getId());
+                        carro.setDestino(destino.getId());
                         carro.crearSimulacion(camino.get(0), 3);
                     }
                 }
@@ -162,39 +168,6 @@ public class MainMapController extends Controller implements Initializable {
         root.getChildren().add(line);
     }
 
-//    private Circle obtenerCirculoDesdeVertice(Vertice vertice) {
-//        for (Circle circle : circulos) {
-//            Vertice v = (Vertice) circle.getUserData();
-//            if (v.equals(vertice)) {
-//                return circle;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    private void efectoDeLinea(Line line, Circle origenCircle, Circle destinoCircle, MouseEvent event) {
-//        if (event.getButton() == MouseButton.PRIMARY) {
-//
-//            if (origenCircle != null) {
-//                origenCircle.setRadius(7);
-//            }
-//            if (destinoCircle != null) {
-//                destinoCircle.setRadius(7);
-//            }
-//            //seleccionada hacer algo para agreagar accidentes o demas
-//            line.setStroke(Color.RED);
-//        } else if (event.getButton() == MouseButton.SECONDARY) {
-//
-//            if (origenCircle != null) {
-//                origenCircle.setRadius(3);
-//            }
-//            if (destinoCircle != null) {
-//                destinoCircle.setRadius(3);
-//            }
-//
-//            line.setStroke(Color.BLACK);
-//        }
-//    }
     private void drawArrow(Line line) {
         if (lineaAnterior != null) {
             lineaAnterior.setStroke(Color.TRANSPARENT); // Volver a color original
@@ -240,28 +213,6 @@ public class MainMapController extends Controller implements Initializable {
             }
         }
         return null;
-    }
-
-    public void animarMovimiento(Vertice destino) {
-        // Crear un cuadrado para representar el vehículo
-        Rectangle cuadrado = new Rectangle(20, 20); // Tamaño del cuadrado
-        cuadrado.setFill(Color.BLACK);
-
-        Line ruta = new Line();
-        ruta.setStartX(origen.getX());
-        ruta.setStartY(origen.getY());
-        ruta.setEndX(destino.getX());
-        ruta.setEndY(destino.getY());
-
-        PathTransition pathTransition = new PathTransition();
-        pathTransition.setNode(cuadrado);
-        pathTransition.setPath(ruta);
-        pathTransition.setDuration(Duration.seconds(3));
-        pathTransition.setCycleCount(1);
-
-        root.getChildren().add(cuadrado);
-
-        pathTransition.play();
     }
 
     public void mostrarRutasDeVertice(Vertice verticeSeleccionado) {
