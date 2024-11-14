@@ -2,19 +2,173 @@
   "vertices": [
     {
       "id": 0,
-      "x": 277.0,
-      "y": 56.0
+      "x": 283.0,
+      "y": 62.0
     },
     {
       "id": 1,
-      "x": 344.0,
-      "y": 174.0
+      "x": 216.0,
+      "y": 196.0
+    },
+    {
+      "id": 2,
+      "x": 284.0,
+      "y": 276.0
+    },
+    {
+      "id": 3,
+      "x": 434.0,
+      "y": 211.0
+    },
+    {
+      "id": 4,
+      "x": 306.0,
+      "y": 172.0
+    },
+    {
+      "id": 5,
+      "x": 394.0,
+      "y": 116.0
     }
   ],
   "matrizAdyacencia": [
     [
+      null,
       {
-        "peso": 2147483647,
+        "origen": {
+          "id": 0,
+          "x": 283.0,
+          "y": 62.0
+        },
+        "destino": {
+          "id": 1,
+          "x": 216.0,
+          "y": 196.0
+        },
+        "peso": 6,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      {
+        "origen": {
+          "id": 1,
+          "x": 216.0,
+          "y": 196.0
+        },
+        "destino": {
+          "id": 0,
+          "x": 283.0,
+          "y": 62.0
+        },
+        "peso": 6,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      {
+        "origen": {
+          "id": 1,
+          "x": 216.0,
+          "y": 196.0
+        },
+        "destino": {
+          "id": 2,
+          "x": 284.0,
+          "y": 276.0
+        },
+        "peso": 5,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      {
+        "origen": {
+          "id": 1,
+          "x": 216.0,
+          "y": 196.0
+        },
+        "destino": {
+          "id": 4,
+          "x": 306.0,
+          "y": 172.0
+        },
+        "peso": 3,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null
+    ],
+    [
+      null,
+      {
+        "origen": {
+          "id": 2,
+          "x": 284.0,
+          "y": 276.0
+        },
+        "destino": {
+          "id": 1,
+          "x": 216.0,
+          "y": 196.0
+        },
+        "peso": 5,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null,
+      null,
+      {
+        "origen": {
+          "id": 2,
+          "x": 284.0,
+          "y": 276.0
+        },
+        "destino": {
+          "id": 4,
+          "x": 306.0,
+          "y": 172.0
+        },
+        "peso": 2,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      {
+        "origen": {
+          "id": 3,
+          "x": 434.0,
+          "y": 211.0
+        },
+        "destino": {
+          "id": 4,
+          "x": 306.0,
+          "y": 172.0
+        },
+        "peso": 9,
         "isClosed": false,
         "time": 0,
         "longitud": 0,
@@ -22,16 +176,16 @@
       },
       {
         "origen": {
-          "id": 0,
-          "x": 277.0,
-          "y": 56.0
+          "id": 3,
+          "x": 434.0,
+          "y": 211.0
         },
         "destino": {
-          "id": 1,
-          "x": 344.0,
-          "y": 174.0
+          "id": 5,
+          "x": 394.0,
+          "y": 116.0
         },
-        "peso": 545,
+        "peso": 3,
         "isClosed": false,
         "time": 0,
         "longitud": 0,
@@ -39,35 +193,220 @@
       }
     ],
     [
+      null,
+      null,
+      null,
       {
-        "peso": 2147483647,
+        "origen": {
+          "id": 4,
+          "x": 306.0,
+          "y": 172.0
+        },
+        "destino": {
+          "id": 3,
+          "x": 434.0,
+          "y": 211.0
+        },
+        "peso": 4,
         "isClosed": false,
         "time": 0,
         "longitud": 0,
         "nivelTrafico": 1
       },
+      null,
       {
-        "peso": 2147483647,
+        "origen": {
+          "id": 4,
+          "x": 306.0,
+          "y": 172.0
+        },
+        "destino": {
+          "id": 5,
+          "x": 394.0,
+          "y": 116.0
+        },
+        "peso": 10,
         "isClosed": false,
         "time": 0,
         "longitud": 0,
         "nivelTrafico": 1
       }
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ]
   ],
   "aristas": [
     {
       "origen": {
         "id": 0,
-        "x": 277.0,
-        "y": 56.0
+        "x": 283.0,
+        "y": 62.0
       },
       "destino": {
         "id": 1,
-        "x": 344.0,
-        "y": 174.0
+        "x": 216.0,
+        "y": 196.0
       },
-      "peso": 545,
+      "peso": 6,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 1,
+        "x": 216.0,
+        "y": 196.0
+      },
+      "destino": {
+        "id": 0,
+        "x": 283.0,
+        "y": 62.0
+      },
+      "peso": 6,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 1,
+        "x": 216.0,
+        "y": 196.0
+      },
+      "destino": {
+        "id": 2,
+        "x": 284.0,
+        "y": 276.0
+      },
+      "peso": 5,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 2,
+        "x": 284.0,
+        "y": 276.0
+      },
+      "destino": {
+        "id": 1,
+        "x": 216.0,
+        "y": 196.0
+      },
+      "peso": 5,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 1,
+        "x": 216.0,
+        "y": 196.0
+      },
+      "destino": {
+        "id": 4,
+        "x": 306.0,
+        "y": 172.0
+      },
+      "peso": 3,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 2,
+        "x": 284.0,
+        "y": 276.0
+      },
+      "destino": {
+        "id": 4,
+        "x": 306.0,
+        "y": 172.0
+      },
+      "peso": 2,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 4,
+        "x": 306.0,
+        "y": 172.0
+      },
+      "destino": {
+        "id": 3,
+        "x": 434.0,
+        "y": 211.0
+      },
+      "peso": 4,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 3,
+        "x": 434.0,
+        "y": 211.0
+      },
+      "destino": {
+        "id": 4,
+        "x": 306.0,
+        "y": 172.0
+      },
+      "peso": 9,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 4,
+        "x": 306.0,
+        "y": 172.0
+      },
+      "destino": {
+        "id": 5,
+        "x": 394.0,
+        "y": 116.0
+      },
+      "peso": 10,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 3,
+        "x": 434.0,
+        "y": 211.0
+      },
+      "destino": {
+        "id": 5,
+        "x": 394.0,
+        "y": 116.0
+      },
+      "peso": 3,
       "isClosed": false,
       "time": 0,
       "longitud": 0,

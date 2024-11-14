@@ -53,6 +53,8 @@ public class MainMapController extends Controller implements Initializable {
     private Line arrowB;
     private Vertice destino;
     private Integer click = 0;
+    @FXML
+    private Button floydMarshallAplicar;
 
     /**
      * Initializes the controller class.
@@ -79,43 +81,6 @@ public class MainMapController extends Controller implements Initializable {
         } else {
             System.out.println("Grafo nulo");
         }
-//        if (aristas != null && !aristas.isEmpty()) {
-//            for (Arista arista : aristas) {
-//                // Asignar la arista al destino en la lista de "recibidas"
-//                Vertice destino1 = verticeExistente(arista.getDestino());
-//                arista.setPeso(arista.getLongitud() * arista.getNivelTrafico());
-//                arista.setIsClosed(Boolean.FALSE);
-//                if (destino1 == null) {
-//                    vertices.add(arista.getDestino());
-//                    arista.getDestino().getRecibidas().add(arista);
-//                } else {
-//                    destino1.getRecibidas().add(arista);
-//                }
-//                Vertice origen1 = verticeExistente(arista.getOrigen());
-//
-//                if (origen1 == null) {
-//                    vertices.add(arista.getOrigen());
-//                    arista.getOrigen().getAristas().add(arista);
-//                } else {
-//                    origen1.getAristas().add(arista);
-//                }
-//
-//                // Dibujar la línea que representa la arista
-//                drawLine(arista);
-//            }
-//        } else {
-//            System.out.println("No hay aristas");
-//        }
-//        if (vertices != null && !vertices.isEmpty()) {
-//            for (Vertice vertice : vertices) {
-//                colocarCirculo(vertice);
-//            }
-//          //  this.grafo = new Grafo();
-//            //this.grafo = new Grafo(aristas);
-//          //  this.grafo.mostrarMatrizAdyacencia();
-//        }
- 
-
     }
 
     private void colocarCirculo(Vertice vertice) {
@@ -144,17 +109,9 @@ public class MainMapController extends Controller implements Initializable {
 
                 } else if (click == 1 && origen != (Vertice) circle.getUserData()) {
                     destino = (Vertice) circle.getUserData();
-                    System.out.println("Peso entre " + origen.getId() + " y " + destino.getId() + " "+ grafo.getPeso(origen, destino)  );
                     click = 0;
-//                   List<Vertice> camino = grafo.dijkstra(origen.getId(), destino.getId());
-//                    drawPath(camino);
-//                    for(Vertice c : camino){
-//                     System.out.println(c.getId() + " ");
-//                    }
-                  
-                    //calcular ruta y dibujarla
-                    //ventana de empezar recorrido elegir algoritmo y mas 
-                    //animacion
+                    List<Integer> camino = grafo.floydWarshall(origen.getId(), destino.getId());
+                    drawPath(grafo.crearCamino(camino));
                 }
 
             } else if (e.getButton() == MouseButton.SECONDARY) {
@@ -373,18 +330,17 @@ public class MainMapController extends Controller implements Initializable {
         stage.show();
     }
 
-    public void drawPath(List<Vertice> vertices) {
+    public void drawPath(List<Arista> aristas) {
 
         clearPath();
-        for (int i = 0; i < vertices.size() - 1; i++) {
-            Vertice origen1 = vertices.get(i);
-            Vertice destino2 = vertices.get(i + 1);
+        for (Arista arista : aristas) {
+
 
             Line line = new Line();
-            line.setStartX(origen1.getX());
-            line.setStartY(origen1.getY());
-            line.setEndX(destino2.getX());
-            line.setEndY(destino2.getY());
+            line.setStartX(arista.getOrigen().getX());
+            line.setStartY(arista.getOrigen().getY());
+            line.setEndX(arista.getDestino().getX());
+            line.setEndY(arista.getDestino().getY());
             line.setStroke(Color.BLUE);
 
             root.getChildren().add(line);

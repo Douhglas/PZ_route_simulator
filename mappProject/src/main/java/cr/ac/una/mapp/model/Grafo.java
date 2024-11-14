@@ -17,33 +17,16 @@ public class Grafo {
     public List<List<Arista>> matrizAdyacencia;
     @Expose
     private List<Arista> aristas;
+    @Expose
+    private int[][] predecesor;
 
     public Grafo() {
         vertices = new ArrayList<>();
-        aristas =  new ArrayList<Arista>();
+        aristas = new ArrayList<Arista>();
         matrizAdyacencia = new ArrayList<>();
         vertices.clear();
         matrizAdyacencia.clear();
         aristas.clear();
-//        this.vertices = obtenerVerticesUnicos(aristas);
-//
-//        // Crear la matriz de adyacencia con tamaño igual al número de vértices
-//        int numVertices = vertices.size();
-//        numVertices += 10;
-//        System.out.println("size vertices:" + vertices.size() +"numvertices:" + numVertices);
-//        matrix = new ArrayList<>(numVertices );
-//
-//        // Inicializar la matriz con ArrayLists
-//        for (int i = 0; i < numVertices; i++) {
-//            matrix.add(new ArrayList<>(Collections.nCopies(numVertices, Integer.MAX_VALUE)));  // Rellenamos con Integer.MAX_VALUE
-//        }
-//
-//        for (Arista arista : aristas) {
-//            int origenIndex = arista.getOrigen().getId();
-//            int destinoIndex = arista.getDestino().getId();
-//
-//            matrix.get(origenIndex).set(destinoIndex, arista.getPeso());
-//        }
     }
 
     public void agregarVertice(Vertice nuevoVertice) {
@@ -56,7 +39,7 @@ public class Grafo {
         int nuevoTamano = vertices.size();
         Arista arista = new Arista();
         arista.setPeso(Integer.MAX_VALUE);
-        matrizAdyacencia.add(new ArrayList<>(Collections.nCopies(nuevoTamano, arista)));
+        matrizAdyacencia.add(new ArrayList<>(Collections.nCopies(nuevoTamano, null)));
 
         System.out.println("Nuevo vértice agregado: " + nuevoVertice.getId());
     }
@@ -81,7 +64,7 @@ public class Grafo {
         System.out.println("Matriz de Adyacencia:");
         for (List<Arista> fila : matrizAdyacencia) {
             for (Arista arista : fila) {
-                if (arista.getPeso() == Integer.MAX_VALUE) {
+                if (arista == null) {
                     System.out.print("∞ ");
                 } else {
                     System.out.print(arista.getPeso() + " ");
@@ -91,19 +74,6 @@ public class Grafo {
         }
     }
 
-//    public void mostrarMatrizAdyacencia() {
-//        System.out.println("Matriz de Adyacencia:");
-//        for (List<Integer> fila : matrix) {
-//            for (Integer valor : fila) {
-//                if (valor == Integer.MAX_VALUE) {
-//                    System.out.print("∞ ");
-//                } else {
-//                    System.out.print(valor + " ");
-//                }
-//            }
-//            System.out.println();
-//        }
-//    }
     public List<Vertice> dijkstra(int origenId, int destinoId) {
 
         int numVertices = vertices.size();
@@ -145,6 +115,65 @@ public class Grafo {
         return new ArrayList<>();  // Si no hay camino
     }
 
+    public List<Integer> floydWarshall(int origen, int destino) {
+        int numVertices = matrizAdyacencia.size();
+        int[][] dist = new int[numVertices][numVertices];
+        predecesor = new int[numVertices][numVertices]; 
+
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                if (i == j) {
+                    dist[i][j] = 0; 
+                    predecesor[i][j] = -1; 
+                } else {
+                    dist[i][j] = Integer.MAX_VALUE;
+                    predecesor[i][j] = -1;
+                }
+            }
+        }
+
+        for (int i = 0; i < numVertices; i++) {
+            for (int j = 0; j < numVertices; j++) {
+                if (matrizAdyacencia.get(i).get(j) != null) {
+                    dist[i][j] = matrizAdyacencia.get(i).get(j).getPeso(); 
+                    predecesor[i][j] = i; 
+                }
+            }
+        }
+
+        for (int k = 0; k < numVertices; k++) {
+            for (int i = 0; i < numVertices; i++) {
+                for (int j = 0; j < numVertices; j++) {
+
+                    if (dist[i][k] != Integer.MAX_VALUE && dist[k][j] != Integer.MAX_VALUE
+                            && dist[i][j] > dist[i][k] + dist[k][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                        predecesor[i][j] = k; 
+                    }
+                }
+            }
+        }
+        
+        return obtenerCamino(origen, destino);
+    }
+
+    public List<Integer> obtenerCamino(int origenId, int destinoId) {
+        List<Integer> camino = new ArrayList<>();
+        if (predecesor[origenId][destinoId] == -1) {
+            return null; // No hay camino
+        }
+
+        camino.add(destinoId);
+
+        while (predecesor[origenId][destinoId] != -1 && destinoId != origenId) {
+            destinoId = predecesor[origenId][destinoId];
+            camino.add(destinoId);
+        }
+
+        Collections.reverse(camino);
+        return camino;
+    }
+
     private List<Vertice> reconstruirCamino(int[] predecesores, int origen, int destino) {
         List<Vertice> camino = new ArrayList<>();
         for (int at = destino; at != -1; at = predecesores[at]) {
@@ -154,12 +183,11 @@ public class Grafo {
         return camino;
     }
 
-         
-    public List<Vertice> getVertices(){
+    public List<Vertice> getVertices() {
         return vertices;
     }
-    
-     public List<Arista> getAristas(){
+
+    public List<Arista> getAristas() {
         return aristas;
     }
 
@@ -171,7 +199,20 @@ public class Grafo {
     public Integer getPeso(Vertice origen, Vertice destino) {
         return matrizAdyacencia.get(origen.getId())
                 .get(destino.getId()).getPeso();
+    }
 
+    public  List<Arista> crearCamino(List<Integer> camino) {
+        List<Arista> aristas =  new ArrayList<>();
+        for (int i = 0; i < camino.size(); i++) {
+            if (i < camino.size()-1) {
+                for (Arista arista : this.aristas) {
+                    if (camino.get(i) == arista.getOrigen().getId() && camino.get(i + 1) == arista.getDestino().getId()) {
+                        aristas.add(arista);
+                    }
+                }
+            }
+        }
+        return aristas;
     }
 
 }

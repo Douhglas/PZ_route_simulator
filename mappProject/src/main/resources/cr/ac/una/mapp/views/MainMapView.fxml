@@ -19,7 +19,7 @@
          <children>
             <Label alignment="CENTER" prefHeight="51.0" prefWidth="154.0" text="Velocidad en km/h" />
             <Spinner prefHeight="25.0" prefWidth="157.0" />
-            <Button mnemonicParsing="false" text="Floyd-marshall" />
+            <Button fx:id="floydMarshallAplicar" mnemonicParsing="false" text="Floyd-marshall" />
             <Button layoutX="109.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Djisktra" />
             <Button mnemonicParsing="false" text="Info" />
          </children>

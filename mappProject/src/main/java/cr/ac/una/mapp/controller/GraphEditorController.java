@@ -56,7 +56,6 @@ public class GraphEditorController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapaImg.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-
             colocarCirculo(event.getX(), event.getY());
         });
     }
@@ -277,7 +276,7 @@ public class GraphEditorController extends Controller implements Initializable {
 
                 arista.setPeso(longitud);
                 grafo.agregarArista(arista);
-
+               
                 ventana.close();
             } catch (NumberFormatException e) {
 
