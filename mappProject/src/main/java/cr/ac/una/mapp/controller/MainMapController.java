@@ -4,6 +4,7 @@ import cr.ac.una.mapp.model.Arista;
 import cr.ac.una.mapp.model.Carro;
 import cr.ac.una.mapp.model.Grafo;
 import cr.ac.una.mapp.model.Vertice;
+import cr.ac.una.mapp.util.AppContext;
 import cr.ac.una.mapp.util.AppManager;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -42,6 +44,8 @@ public class MainMapController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
+    @FXML
+    private Button btnInfo;
     @FXML
     private ImageView mapaImg;
     private List<Vertice> vertices = new ArrayList<>();
@@ -74,12 +78,14 @@ public class MainMapController extends Controller implements Initializable {
 
     int destinoFloyd = 0;
 
+    Color color;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
 
     @Override
@@ -87,9 +93,9 @@ public class MainMapController extends Controller implements Initializable {
         //elimianr lo que haya limpiar todo y despues cargar los nodos
         origen = new Vertice();
         carro.setAnchorPane(root);
-        
-        
+
         grafo = AppManager.getInstance().cargar();
+        AppContext.getInstance().set("grafo", grafo);
         carro.setGrafo(grafo);
         
         if (grafo != null && !grafo.getVertices().isEmpty()) {
@@ -97,7 +103,7 @@ public class MainMapController extends Controller implements Initializable {
                colocarCirculo(vertice);
            }
            for(Arista arista : grafo.getAristas()){
-               drawLine(arista);
+               drawLine(arista, Color.RED);
                System.out.println("mvof" +arista.getPeso());
            }
         } else {
@@ -158,7 +164,7 @@ public class MainMapController extends Controller implements Initializable {
         });
     }
 
-    private void drawLine(Arista arista) {
+    private void drawLine(Arista arista, Paint color) {
 
         double offset = 10;
 
@@ -176,7 +182,7 @@ public class MainMapController extends Controller implements Initializable {
 
         Line line = new Line(startX + scaleX, startY + scaleY, endX - scaleX, endY - scaleY);
 
-        line.setStroke(Color.CADETBLUE);
+        line.setStroke(color);
         line.setStrokeWidth(2);
         line.setUserData(arista);
 
@@ -271,7 +277,7 @@ public class MainMapController extends Controller implements Initializable {
                 spinnerTrafico.getValueFactory().setValue(nuevaRuta.getNivelTrafico());
                 nuevaRuta.setPeso(nuevaRuta.getLongitud() * nuevaRuta.getNivelTrafico());
                 // Resaltar ruta seleccionada en la ventana principal
-                drawLine(nuevaRuta);
+                drawLine(nuevaRuta, Color.CADETBLUE);
             }
         });
 
@@ -361,7 +367,7 @@ public class MainMapController extends Controller implements Initializable {
         }
     }
 
-    private void verificarYActualizarRuta(Vertice actual, Vertice destino) {
+   /* private void verificarYActualizarRuta(Vertice actual, Vertice destino) {
         if (condicionesCambiadas()) {
             List<Integer> nuevaRuta = grafo.dijkstra(actual.getId(), destino.getId());
             List<Arista> nuevaRutaAristas = grafo.crearCamino(nuevaRuta);
@@ -370,7 +376,24 @@ public class MainMapController extends Controller implements Initializable {
             drawPath(nuevaRutaAristas);
 
             setRutaParaMovimiento(nuevaRutaAristas);
+
         }
+    }*/
+
+    @FXML
+    void onActionAbrirInfo(ActionEvent event) {
+        System.out.println("Cambiando...");
+
+        for(Arista arista : grafo.getAristas()){
+            System.out.println("Aristas antes: " +arista.getPeso());
+        }
+        grafo.mostrarMatrizAdyacenciaActual();
+        grafo.matrizAdyacencia.get(1).get(2).setPeso(2000);
+        for(Arista arista : grafo.getAristas()){
+            System.out.println("Aristas después: " +arista.getPeso());
+        }
+        grafo.mostrarMatrizAdyacenciaActual();
+        AppContext.getInstance().set("grafo", grafo);
     }
 
 }

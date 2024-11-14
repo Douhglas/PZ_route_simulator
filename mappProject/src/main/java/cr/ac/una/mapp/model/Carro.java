@@ -5,6 +5,8 @@
 package cr.ac.una.mapp.model;
 
 import java.util.List;
+
+import cr.ac.una.mapp.util.AppContext;
 import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -73,11 +75,14 @@ public class Carro {
         pathTransition.setOnFinished(event -> {
            if (origen != destino) {
                origen = siguienteNodo;
-               List<Arista> camino = grafo.floydWarshall(origen, destino);
-               if (camino == null) {
+               grafo = (Grafo) AppContext.getInstance().get("grafo");
+               System.out.println("Aristas en un punto: " + grafo.getAristas());
+               List<Integer> camino = grafo.dijkstra(origen, destino);
+               List<Arista> caminoAristas = grafo.crearCaminoDjikstra(camino);
+               if (caminoAristas == null) {
                    return;
                }
-               crearSimulacion(camino.get(0), tiempoAnimacion);
+               crearSimulacion(caminoAristas.get(0), tiempoAnimacion);
            }
         });
     }
