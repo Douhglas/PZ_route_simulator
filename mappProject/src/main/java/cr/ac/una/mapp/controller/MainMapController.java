@@ -104,7 +104,6 @@ public class MainMapController extends Controller implements Initializable {
            }
            for(Arista arista : grafo.getAristas()){
                drawLine(arista, Color.RED);
-               System.out.println("mvof" +arista.getPeso());
            }
         } else {
             System.out.println("Grafo nulo");
@@ -231,7 +230,7 @@ public class MainMapController extends Controller implements Initializable {
 
     private Vertice verticeExistente(Vertice verticeBuscado) {
         for (Vertice v : vertices) {
-            if (v.equals(verticeBuscado)) { // Suponiendo que equals está correctamente sobrecargado
+            if (v.equals(verticeBuscado)) { 
                 return v;
             }
         }
@@ -318,6 +317,7 @@ public class MainMapController extends Controller implements Initializable {
 
 
             Line line = new Line();
+            line.setStrokeWidth(4);
             line.setStartX(arista.getOrigen().getX());
             line.setStartY(arista.getOrigen().getY());
             line.setEndX(arista.getDestino().getX());
@@ -340,8 +340,7 @@ public class MainMapController extends Controller implements Initializable {
     @FXML
     void onActionCalcularDjikstra(ActionEvent event) {
 
-        List<Integer> caminoIds = grafo.dijkstra(origenDjikstra, destinoDjikstra);
-        List<Arista> caminoAristas = grafo.crearCaminoDjikstra(caminoIds);
+        List<Arista> caminoAristas = grafo.dijkstra(origenDjikstra, destinoDjikstra);
 
         if (caminoAristas == null) {
             System.out.println("No existe camino");
@@ -349,7 +348,7 @@ public class MainMapController extends Controller implements Initializable {
             drawPath(caminoAristas);
             carro.setOrigen(origen.getId());
             carro.setDestino(destino.getId());
-            carro.crearSimulacion(caminoAristas.get(0), 3);
+            carro.IniciarRecorrido(caminoAristas);
         }
 
     }

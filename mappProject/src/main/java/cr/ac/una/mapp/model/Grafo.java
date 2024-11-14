@@ -20,6 +20,7 @@ public class Grafo {
     @Expose
     private int[][] predecesor;
     
+    public boolean isUsingDijkstra = true;
     
 
     public Grafo() {
@@ -76,7 +77,7 @@ public class Grafo {
         }
     }
 
-    public List<Integer> dijkstra(int origenId, int destinoId) {
+    public List<Arista> dijkstra(int origenId, int destinoId) {
         int numVertices = vertices.size();
 
         int[] distancias = new int[numVertices];
@@ -94,7 +95,8 @@ public class Grafo {
             int actualId = actual.getId();
 
             if (actualId == destinoId) {
-                return reconstruirCaminoDjikstra(predecesores, origenId, destinoId);
+                List<Integer> caminoInteger =  reconstruirCaminoDjikstra(predecesores, origenId, destinoId);
+                return crearCamino(caminoInteger);
             }
 
             for (Arista arista : matrizAdyacencia.get(actualId)) {
@@ -111,7 +113,7 @@ public class Grafo {
             }
         }
 
-        return new ArrayList<>();
+        return null;
     }
 
 
