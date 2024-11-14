@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -60,7 +61,18 @@ public class MainMapController extends Controller implements Initializable {
     private List<Arista> caminoActual;
     private List<List<Arista>> caminosRecorridos; 
     @FXML
-    private Button floydMarshallAplicar;
+    private Button btnFloyd;
+
+    @FXML
+    private Button btnDijkstra;
+
+    int origenDjikstra = 0;
+
+    int destinoDjikstra = 0;
+
+    int origenFloyd = 0;
+
+    int destinoFloyd = 0;
 
     /**
      * Initializes the controller class.
@@ -110,11 +122,15 @@ public class MainMapController extends Controller implements Initializable {
                 if (click == 0) {
                     
                     origen = (Vertice) circle.getUserData();
+                    origenDjikstra = origen.getId();
+                    origenFloyd = origen.getId();
                     click++;
                     System.out.println("click en nodo : " + origen.getId());
 
                 } else if (click == 1 && origen != (Vertice) circle.getUserData()) {
                     destino = (Vertice) circle.getUserData();
+                    destinoDjikstra = destino.getId();
+                    destinoFloyd = destino.getId();
                     click = 0;
                     List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
                     if (camino == null) {
@@ -125,6 +141,7 @@ public class MainMapController extends Controller implements Initializable {
                         carro.setDestino(destino.getId());
                         carro.crearSimulacion(camino.get(0), 3);
                     }
+
                 }
 
             } else if (e.getButton() == MouseButton.SECONDARY) {
@@ -311,5 +328,35 @@ public class MainMapController extends Controller implements Initializable {
             root.getChildren().remove(line);
         }
         lineas.clear();
+    }
+
+
+    @FXML
+    void onActionCalcularDjikstra(ActionEvent event) {
+
+
+        List<Integer> caminoIds = grafo.dijkstra(origenDjikstra, destinoDjikstra);
+
+        List<Arista> caminoAristas = grafo.crearCaminoDjikstra(caminoIds);
+
+        if (caminoAristas == null) {
+            System.out.println("No existe camino");
+        } else {
+            drawPath(caminoAristas);
+            Carro carro = new Carro(root);
+            carro.crearSimulacion(caminoAristas.get(0), 3);
+        }
+    }
+
+    @FXML
+    void onActionCalcularFloyd(ActionEvent event) {
+        List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
+        if (camino == null) {
+            System.out.println("No existe camino");
+        } else {
+            drawPath(camino);
+            Carro carro = new Carro(root);
+            carro.crearSimulacion(camino.get(0), 3);
+        }
     }
 }

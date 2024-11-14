@@ -12,7 +12,7 @@ public class Grafo {
     @Expose
     private List<Vertice> vertices;
     @Expose
-    private List<List<Integer>> matrix;  
+    private List<List<Integer>> matrix;  //no se usa
     @Expose
     public List<List<Arista>> matrizAdyacencia;
     @Expose
@@ -76,46 +76,44 @@ public class Grafo {
         }
     }
 
-    public List<Vertice> dijkstra(int origenId, int destinoId) {
-
+    public List<Integer> dijkstra(int origenId, int destinoId) {
         int numVertices = vertices.size();
-        numVertices += 10;
-        // Distancias mínimas desde el origen
+
         int[] distancias = new int[numVertices];
         Arrays.fill(distancias, Integer.MAX_VALUE);
         distancias[origenId] = 0;
 
-        // Predecesores para reconstruir el camino
         int[] predecesores = new int[numVertices];
         Arrays.fill(predecesores, -1);
 
-        // Min-heap para seleccionar el vértice con la distancia mínima
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(v -> distancias[v]));
-        pq.add(origenId);
+        PriorityQueue<Vertice> pq = new PriorityQueue<>(Comparator.comparingInt(v -> distancias[v.getId()]));
+        pq.add(vertices.get(origenId));
 
         while (!pq.isEmpty()) {
-            int actual = pq.poll();
+            Vertice actual = pq.poll();
+            int actualId = actual.getId();
 
-            // Si llegamos al destino, reconstruimos el camino
-            if (actual == destinoId) {
-                return reconstruirCamino(predecesores, origenId, destinoId);
+            if (actualId == destinoId) {
+                return reconstruirCaminoDjikstra(predecesores, origenId, destinoId);
             }
 
-            // Recorremos los vecinos del vértice actual
-            for (int vecino = 0; vecino < numVertices; vecino++) {
-                if (matrix.get(actual).get(vecino) != Integer.MAX_VALUE) {
-                    int nuevoDistancia = distancias[actual] + matrix.get(actual).get(vecino);
-                    if (nuevoDistancia < distancias[vecino]) {
-                        distancias[vecino] = nuevoDistancia;
-                        predecesores[vecino] = actual;
-                        pq.add(vecino);
+            for (Arista arista : matrizAdyacencia.get(actualId)) {
+                if (arista != null) {
+                    int vecinoId = arista.getDestino().getId();
+                    int nuevaDistancia = distancias[actualId] + arista.getPeso();
+
+                    if (nuevaDistancia < distancias[vecinoId]) {
+                        distancias[vecinoId] = nuevaDistancia;
+                        predecesores[vecinoId] = actualId;
+                        pq.add(vertices.get(vecinoId));
                     }
                 }
             }
         }
 
-        return new ArrayList<>();  // Si no hay camino
+        return new ArrayList<>();
     }
+
 
     public List<Arista> floydWarshall(int origen, int destino) {
         int numVertices = matrizAdyacencia.size();
@@ -188,6 +186,19 @@ public class Grafo {
         return camino;
     }
 
+    public  List<Arista> crearCamino(List<Integer> camino) {
+        List<Arista> aristas =  new ArrayList<>();
+        for (int i = 0; i < camino.size(); i++) {
+            if (i < camino.size()-1) {
+                for (Arista arista : this.aristas) {
+                    if (camino.get(i) == arista.getOrigen().getId() && camino.get(i + 1) == arista.getDestino().getId()) {
+                        aristas.add(arista);
+                    }
+                }
+            }
+        }
+        return aristas;
+    }
     public List<Vertice> getVertices() {
         return vertices;
     }
@@ -206,15 +217,24 @@ public class Grafo {
                 .get(destino.getId()).getPeso();
     }
 
-    public  List<Arista> crearCamino(List<Integer> camino) {
-        List<Arista> aristas =  new ArrayList<>();
-        for (int i = 0; i < camino.size(); i++) {
-            if (i < camino.size()-1) {
-                for (Arista arista : this.aristas) {
-                    if (camino.get(i) == arista.getOrigen().getId() && camino.get(i + 1) == arista.getDestino().getId()) {
-                        aristas.add(arista);
-                    }
-                }
+    private List<Integer> reconstruirCaminoDjikstra(int[] predecesores, int origen, int destino) {
+        List<Integer> camino = new ArrayList<>();
+        for (int at = destino; at != -1; at = predecesores[at]) {
+            camino.add(at);
+        }
+        Collections.reverse(camino);
+        return camino;
+    }
+
+    public List<Arista> crearCaminoDjikstra(List<Integer> camino) {
+        List<Arista> aristas = new ArrayList<>();
+        for (int i = 0; i < camino.size() - 1; i++) {
+            int origenId = camino.get(i);
+            int destinoId = camino.get(i + 1);
+
+            Arista arista = matrizAdyacencia.get(origenId).get(destinoId);
+            if (arista != null) {
+                aristas.add(arista);
             }
         }
         return aristas;
