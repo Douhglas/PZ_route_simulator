@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.PrincipalController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.GraphEditorController">
    <children>
       <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="325.02191162109375" AnchorPane.topAnchor="0.0">
          <image>
@@ -15,7 +15,6 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="648.0" layoutY="4.0" prefHeight="648.0" prefWidth="292.0">
          <children>
-            <Button fx:id="btnAldf" mnemonicParsing="false" text="Button" />
             <Button mnemonicParsing="false" onAction="#guardarAction" prefHeight="25.0" prefWidth="158.0" text="guardar configuracion" />
             <Button mnemonicParsing="false" onAction="#cargarAction" prefHeight="25.0" prefWidth="158.0" text="Cargar configuracion" />
             <Button mnemonicParsing="false" text="Button" />

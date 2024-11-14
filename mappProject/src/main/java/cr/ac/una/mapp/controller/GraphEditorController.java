@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  *
  * @author stward segura
  */
-public class PrincipalController extends Controller implements Initializable {
+public class GraphEditorController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
@@ -46,6 +46,7 @@ public class PrincipalController extends Controller implements Initializable {
     private List<Vertice> vertices = new ArrayList<>();
     private List<Arista> aristas = new ArrayList<>();
     private int index = 0;
+
 
     /**
      * Initializes the controller class.

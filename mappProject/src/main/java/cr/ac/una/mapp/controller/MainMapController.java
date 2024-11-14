@@ -36,7 +36,7 @@ import javafx.util.Duration;
  *
  * @author stward segura
  */
-public class SecundaryController extends Controller implements Initializable {
+public class MainMapController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
