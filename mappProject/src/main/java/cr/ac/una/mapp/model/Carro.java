@@ -6,6 +6,7 @@ package cr.ac.una.mapp.model;
 
 import java.util.List;
 
+import cr.ac.una.mapp.controller.MainMapController;
 import cr.ac.una.mapp.util.AppContext;
 import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
@@ -34,6 +35,7 @@ public class Carro {
     private Integer origen;
     private Integer siguienteNodo;
     private Integer destino;
+
 
     public Carro(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
@@ -79,6 +81,8 @@ public class Carro {
                System.out.println("Aristas en un punto: " + grafo.getAristas());
                List<Integer> camino = grafo.dijkstra(origen, destino);
                List<Arista> caminoAristas = grafo.crearCaminoDjikstra(camino);
+
+
                if (caminoAristas == null) {
                    return;
                }

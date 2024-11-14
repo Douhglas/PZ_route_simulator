@@ -243,7 +243,7 @@ public class Grafo {
     public void actualizarPesoArista(int origenId, int destinoId, int nivelTrafico) {
         Arista arista = matrizAdyacencia.get(origenId).get(destinoId);
         if (arista != null) {
-            arista.setPeso(arista.getLongitud() * nivelTrafico);  // Ajusta el peso según el nivel de tráfico
+            arista.setPeso(arista.getLongitud() * nivelTrafico);
         }
     }
 

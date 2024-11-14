@@ -1,28 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.MainMapController">
    <children>
-      <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" layoutX="6.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="325.02191162109375" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../resources/map.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="CENTER" layoutX="694.0" layoutY="4.0" prefHeight="648.0" prefWidth="292.0">
+      <HBox>
          <children>
-            <Label alignment="CENTER" prefHeight="51.0" prefWidth="154.0" text="Velocidad en km/h" />
-            <Spinner prefHeight="25.0" prefWidth="157.0" />
-            <Button fx:id="btnFloyd" mnemonicParsing="false" onAction="#onActionCalcularFloyd" text="Floyd-marshall" />
-            <Button fx:id="btnDijkstra" layoutX="109.0" layoutY="377.0" mnemonicParsing="false" onAction="#onActionCalcularDjikstra" prefHeight="25.0" prefWidth="94.0" text="Djisktra" />
-            <Button fx:id="btnInfo" mnemonicParsing="false" onAction="#onActionAbrirInfo" text="Info" />
+            <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../resources/map.png" />
+               </image>
+            </ImageView>
+
+
+            <VBox alignment="CENTER" prefWidth="300.0" spacing="15.0">
+               <children>
+
+                  <Label prefHeight="26.0" prefWidth="278.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Opciones de Algoritmo y Modificación de Ruta" />
+
+                  <Button fx:id="btnDijkstra" onAction="#onActionCalcularDjikstra" prefWidth="200" text="Aplicar Dijkstra" />
+                  <Button fx:id="btnFloydWarshall" onAction="#onActionCalcularFloyd" prefWidth="200" text="Aplicar Floyd-Warshall" />
+
+                  <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Modificar Estado de Arista Seleccionada" />
+
+                  <Label text="Nivel de Tráfico:" />
+                  <Spinner fx:id="spinnerTrafico" editable="true" initialValue="1" max="3" min="1" prefWidth="200" />
+
+                  <CheckBox fx:id="checkBoxCerrado" text="Marcar como Calle Cerrada" />
+
+                  <Button fx:id="btnGuardarCambios" onAction="#onActionGuardarCambios" prefWidth="200" text="Guardar Cambios en Arista" />
+
+                  <Separator prefWidth="200" />
+
+                  <Button fx:id="btnInfo" onAction="#onActionAbrirInfo" prefWidth="200" text="Mostrar Matriz de Adyacencia" />
+
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>
