@@ -1,0 +1,2246 @@
+[
+  {
+    "origen": {
+      "id": 1,
+      "x": 280.0,
+      "y": 58.0
+    },
+    "destino": {
+      "id": 2,
+      "x": 250.0,
+      "y": 82.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 80,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 2,
+      "x": 250.0,
+      "y": 82.0
+    },
+    "destino": {
+      "id": 3,
+      "x": 238.0,
+      "y": 106.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 75,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 3,
+      "x": 238.0,
+      "y": 106.0
+    },
+    "destino": {
+      "id": 4,
+      "x": 266.0,
+      "y": 128.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 80,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 4,
+      "x": 266.0,
+      "y": 128.0
+    },
+    "destino": {
+      "id": 5,
+      "x": 278.0,
+      "y": 154.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 87,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 5,
+      "x": 278.0,
+      "y": 154.0
+    },
+    "destino": {
+      "id": 6,
+      "x": 296.0,
+      "y": 192.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 6,
+      "x": 296.0,
+      "y": 192.0
+    },
+    "destino": {
+      "id": 7,
+      "x": 296.0,
+      "y": 234.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 97,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 7,
+      "x": 296.0,
+      "y": 234.0
+    },
+    "destino": {
+      "id": 8,
+      "x": 338.0,
+      "y": 254.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 8,
+      "x": 338.0,
+      "y": 254.0
+    },
+    "destino": {
+      "id": 9,
+      "x": 384.0,
+      "y": 270.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 99,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 9,
+      "x": 384.0,
+      "y": 270.0
+    },
+    "destino": {
+      "id": 13,
+      "x": 394.0,
+      "y": 252.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 15,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 1,
+      "x": 280.0,
+      "y": 58.0
+    },
+    "destino": {
+      "id": 12,
+      "x": 340.0,
+      "y": 170.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 280,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 12,
+      "x": 340.0,
+      "y": 170.0
+    },
+    "destino": {
+      "id": 11,
+      "x": 358.0,
+      "y": 202.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 11,
+      "x": 358.0,
+      "y": 202.0
+    },
+    "destino": {
+      "id": 13,
+      "x": 394.0,
+      "y": 252.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 13,
+      "x": 394.0,
+      "y": 252.0
+    },
+    "destino": {
+      "id": 14,
+      "x": 422.0,
+      "y": 300.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 14,
+      "x": 422.0,
+      "y": 300.0
+    },
+    "destino": {
+      "id": 15,
+      "x": 410.0,
+      "y": 326.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 78,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 15,
+      "x": 410.0,
+      "y": 326.0
+    },
+    "destino": {
+      "id": 16,
+      "x": 390.0,
+      "y": 318.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 46,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 18,
+      "x": 382.0,
+      "y": 340.0
+    },
+    "destino": {
+      "id": 16,
+      "x": 390.0,
+      "y": 318.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 46,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 19,
+      "x": 360.0,
+      "y": 330.0
+    },
+    "destino": {
+      "id": 18,
+      "x": 382.0,
+      "y": 340.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 40,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 16,
+      "x": 390.0,
+      "y": 318.0
+    },
+    "destino": {
+      "id": 20,
+      "x": 368.0,
+      "y": 308.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 50,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 19,
+      "x": 360.0,
+      "y": 330.0
+    },
+    "destino": {
+      "id": 20,
+      "x": 368.0,
+      "y": 308.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 50,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 20,
+      "x": 368.0,
+      "y": 308.0
+    },
+    "destino": {
+      "id": 9,
+      "x": 384.0,
+      "y": 270.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 20,
+      "x": 368.0,
+      "y": 308.0
+    },
+    "destino": {
+      "id": 21,
+      "x": 326.0,
+      "y": 294.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 28,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 37,
+      "x": 316.0,
+      "y": 376.0
+    },
+    "destino": {
+      "id": 33,
+      "x": 340.0,
+      "y": 386.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 45,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 35,
+      "x": 296.0,
+      "y": 370.0
+    },
+    "destino": {
+      "id": 37,
+      "x": 316.0,
+      "y": 376.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 40,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 36,
+      "x": 258.0,
+      "y": 356.0
+    },
+    "destino": {
+      "id": 35,
+      "x": 296.0,
+      "y": 370.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 94,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 44,
+      "x": 216.0,
+      "y": 338.0
+    },
+    "destino": {
+      "id": 36,
+      "x": 258.0,
+      "y": 356.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 95,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 43,
+      "x": 166.0,
+      "y": 318.0
+    },
+    "destino": {
+      "id": 44,
+      "x": 216.0,
+      "y": 338.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 28,
+      "x": 396.0,
+      "y": 364.0
+    },
+    "destino": {
+      "id": 27,
+      "x": 354.0,
+      "y": 350.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 27,
+      "x": 354.0,
+      "y": 350.0
+    },
+    "destino": {
+      "id": 19,
+      "x": 360.0,
+      "y": 330.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 50,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 34,
+      "x": 312.0,
+      "y": 332.0
+    },
+    "destino": {
+      "id": 35,
+      "x": 296.0,
+      "y": 370.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 40,
+      "x": 266.0,
+      "y": 318.0
+    },
+    "destino": {
+      "id": 41,
+      "x": 228.0,
+      "y": 312.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 85,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 40,
+      "x": 266.0,
+      "y": 318.0
+    },
+    "destino": {
+      "id": 25,
+      "x": 270.0,
+      "y": 274.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 25,
+      "x": 270.0,
+      "y": 274.0
+    },
+    "destino": {
+      "id": 26,
+      "x": 270.0,
+      "y": 250.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 48,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 26,
+      "x": 270.0,
+      "y": 250.0
+    },
+    "destino": {
+      "id": 22,
+      "x": 252.0,
+      "y": 210.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 22,
+      "x": 252.0,
+      "y": 210.0
+    },
+    "destino": {
+      "id": 6,
+      "x": 296.0,
+      "y": 192.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 6,
+      "x": 296.0,
+      "y": 192.0
+    },
+    "destino": {
+      "id": 12,
+      "x": 340.0,
+      "y": 170.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 12,
+      "x": 340.0,
+      "y": 170.0
+    },
+    "destino": {
+      "id": 6,
+      "x": 296.0,
+      "y": 192.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 6,
+      "x": 296.0,
+      "y": 192.0
+    },
+    "destino": {
+      "id": 22,
+      "x": 252.0,
+      "y": 210.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 22,
+      "x": 252.0,
+      "y": 210.0
+    },
+    "destino": {
+      "id": 23,
+      "x": 222.0,
+      "y": 202.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 79,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 3,
+      "x": 238.0,
+      "y": 106.0
+    },
+    "destino": {
+      "id": 24,
+      "x": 222.0,
+      "y": 178.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 160,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 23,
+      "x": 222.0,
+      "y": 202.0
+    },
+    "destino": {
+      "id": 72,
+      "x": 208.0,
+      "y": 266.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 140,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 24,
+      "x": 222.0,
+      "y": 178.0
+    },
+    "destino": {
+      "id": 23,
+      "x": 222.0,
+      "y": 202.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 30,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 72,
+      "x": 208.0,
+      "y": 266.0
+    },
+    "destino": {
+      "id": 42,
+      "x": 182.0,
+      "y": 300.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 42,
+      "x": 182.0,
+      "y": 300.0
+    },
+    "destino": {
+      "id": 43,
+      "x": 166.0,
+      "y": 318.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 30,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 43,
+      "x": 166.0,
+      "y": 318.0
+    },
+    "destino": {
+      "id": 47,
+      "x": 136.0,
+      "y": 348.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 97,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 47,
+      "x": 136.0,
+      "y": 348.0
+    },
+    "destino": {
+      "id": 48,
+      "x": 112.0,
+      "y": 376.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 73,
+      "x": 36.0,
+      "y": 464.0
+    },
+    "destino": {
+      "id": 61,
+      "x": 262.0,
+      "y": 586.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 550,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 61,
+      "x": 262.0,
+      "y": 586.0
+    },
+    "destino": {
+      "id": 73,
+      "x": 36.0,
+      "y": 464.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 550,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 61,
+      "x": 262.0,
+      "y": 586.0
+    },
+    "destino": {
+      "id": 60,
+      "x": 306.0,
+      "y": 608.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 60,
+      "x": 306.0,
+      "y": 608.0
+    },
+    "destino": {
+      "id": 59,
+      "x": 360.0,
+      "y": 632.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 114,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 59,
+      "x": 360.0,
+      "y": 632.0
+    },
+    "destino": {
+      "id": 58,
+      "x": 364.0,
+      "y": 614.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 45,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 59,
+      "x": 360.0,
+      "y": 632.0
+    },
+    "destino": {
+      "id": 71,
+      "x": 380.0,
+      "y": 638.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 47,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 71,
+      "x": 380.0,
+      "y": 638.0
+    },
+    "destino": {
+      "id": 74,
+      "x": 408.0,
+      "y": 568.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 160,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 70,
+      "x": 426.0,
+      "y": 516.0
+    },
+    "destino": {
+      "id": 69,
+      "x": 442.0,
+      "y": 476.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 74,
+      "x": 408.0,
+      "y": 568.0
+    },
+    "destino": {
+      "id": 70,
+      "x": 426.0,
+      "y": 516.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 69,
+      "x": 442.0,
+      "y": 476.0
+    },
+    "destino": {
+      "id": 30,
+      "x": 458.0,
+      "y": 436.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 30,
+      "x": 458.0,
+      "y": 436.0
+    },
+    "destino": {
+      "id": 29,
+      "x": 474.0,
+      "y": 400.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 107,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 29,
+      "x": 474.0,
+      "y": 400.0
+    },
+    "destino": {
+      "id": 28,
+      "x": 396.0,
+      "y": 364.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 170,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 28,
+      "x": 396.0,
+      "y": 364.0
+    },
+    "destino": {
+      "id": 32,
+      "x": 380.0,
+      "y": 404.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 96,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 32,
+      "x": 380.0,
+      "y": 404.0
+    },
+    "destino": {
+      "id": 31,
+      "x": 420.0,
+      "y": 420.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 95,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 31,
+      "x": 420.0,
+      "y": 420.0
+    },
+    "destino": {
+      "id": 30,
+      "x": 458.0,
+      "y": 436.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 96,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 15,
+      "x": 410.0,
+      "y": 326.0
+    },
+    "destino": {
+      "id": 28,
+      "x": 396.0,
+      "y": 364.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 32,
+      "x": 380.0,
+      "y": 404.0
+    },
+    "destino": {
+      "id": 54,
+      "x": 364.0,
+      "y": 444.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 54,
+      "x": 364.0,
+      "y": 444.0
+    },
+    "destino": {
+      "id": 64,
+      "x": 346.0,
+      "y": 486.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 64,
+      "x": 346.0,
+      "y": 486.0
+    },
+    "destino": {
+      "id": 63,
+      "x": 334.0,
+      "y": 522.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 63,
+      "x": 334.0,
+      "y": 522.0
+    },
+    "destino": {
+      "id": 60,
+      "x": 306.0,
+      "y": 608.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 190,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 60,
+      "x": 306.0,
+      "y": 608.0
+    },
+    "destino": {
+      "id": 63,
+      "x": 334.0,
+      "y": 522.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 190,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 63,
+      "x": 334.0,
+      "y": 522.0
+    },
+    "destino": {
+      "id": 62,
+      "x": 286.0,
+      "y": 510.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 62,
+      "x": 286.0,
+      "y": 510.0
+    },
+    "destino": {
+      "id": 63,
+      "x": 334.0,
+      "y": 522.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 63,
+      "x": 334.0,
+      "y": 522.0
+    },
+    "destino": {
+      "id": 57,
+      "x": 368.0,
+      "y": 536.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 57,
+      "x": 368.0,
+      "y": 536.0
+    },
+    "destino": {
+      "id": 56,
+      "x": 384.0,
+      "y": 498.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 56,
+      "x": 384.0,
+      "y": 498.0
+    },
+    "destino": {
+      "id": 55,
+      "x": 402.0,
+      "y": 458.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 64,
+      "x": 346.0,
+      "y": 486.0
+    },
+    "destino": {
+      "id": 56,
+      "x": 384.0,
+      "y": 498.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 68,
+      "x": 264.0,
+      "y": 458.0
+    },
+    "destino": {
+      "id": 51,
+      "x": 220.0,
+      "y": 442.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 51,
+      "x": 220.0,
+      "y": 442.0
+    },
+    "destino": {
+      "id": 50,
+      "x": 188.0,
+      "y": 430.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 50,
+      "x": 188.0,
+      "y": 430.0
+    },
+    "destino": {
+      "id": 49,
+      "x": 154.0,
+      "y": 414.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 49,
+      "x": 154.0,
+      "y": 414.0
+    },
+    "destino": {
+      "id": 48,
+      "x": 112.0,
+      "y": 376.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 48,
+      "x": 112.0,
+      "y": 376.0
+    },
+    "destino": {
+      "id": 49,
+      "x": 154.0,
+      "y": 414.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 49,
+      "x": 154.0,
+      "y": 414.0
+    },
+    "destino": {
+      "id": 50,
+      "x": 188.0,
+      "y": 430.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 50,
+      "x": 188.0,
+      "y": 430.0
+    },
+    "destino": {
+      "id": 51,
+      "x": 220.0,
+      "y": 442.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 51,
+      "x": 220.0,
+      "y": 442.0
+    },
+    "destino": {
+      "id": 68,
+      "x": 264.0,
+      "y": 458.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 68,
+      "x": 264.0,
+      "y": 458.0
+    },
+    "destino": {
+      "id": 67,
+      "x": 282.0,
+      "y": 410.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 67,
+      "x": 282.0,
+      "y": 410.0
+    },
+    "destino": {
+      "id": 52,
+      "x": 242.0,
+      "y": 396.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 67,
+      "x": 282.0,
+      "y": 410.0
+    },
+    "destino": {
+      "id": 38,
+      "x": 302.0,
+      "y": 418.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 79,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 38,
+      "x": 302.0,
+      "y": 418.0
+    },
+    "destino": {
+      "id": 37,
+      "x": 316.0,
+      "y": 376.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 38,
+      "x": 302.0,
+      "y": 418.0
+    },
+    "destino": {
+      "id": 66,
+      "x": 316.0,
+      "y": 424.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 30,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 65,
+      "x": 298.0,
+      "y": 470.0
+    },
+    "destino": {
+      "id": 66,
+      "x": 316.0,
+      "y": 424.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 66,
+      "x": 316.0,
+      "y": 424.0
+    },
+    "destino": {
+      "id": 54,
+      "x": 364.0,
+      "y": 444.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 51,
+      "x": 220.0,
+      "y": 442.0
+    },
+    "destino": {
+      "id": 52,
+      "x": 242.0,
+      "y": 396.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 52,
+      "x": 242.0,
+      "y": 396.0
+    },
+    "destino": {
+      "id": 67,
+      "x": 282.0,
+      "y": 410.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 52,
+      "x": 242.0,
+      "y": 396.0
+    },
+    "destino": {
+      "id": 53,
+      "x": 210.0,
+      "y": 382.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 98,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 50,
+      "x": 188.0,
+      "y": 430.0
+    },
+    "destino": {
+      "id": 53,
+      "x": 210.0,
+      "y": 382.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 53,
+      "x": 210.0,
+      "y": 382.0
+    },
+    "destino": {
+      "id": 50,
+      "x": 188.0,
+      "y": 430.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 53,
+      "x": 210.0,
+      "y": 382.0
+    },
+    "destino": {
+      "id": 45,
+      "x": 196.0,
+      "y": 376.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 30,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 45,
+      "x": 196.0,
+      "y": 376.0
+    },
+    "destino": {
+      "id": 46,
+      "x": 166.0,
+      "y": 364.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 89,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 46,
+      "x": 166.0,
+      "y": 364.0
+    },
+    "destino": {
+      "id": 47,
+      "x": 136.0,
+      "y": 348.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 93,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 47,
+      "x": 136.0,
+      "y": 348.0
+    },
+    "destino": {
+      "id": 46,
+      "x": 166.0,
+      "y": 364.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 93,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 46,
+      "x": 166.0,
+      "y": 364.0
+    },
+    "destino": {
+      "id": 45,
+      "x": 196.0,
+      "y": 376.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 89,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 45,
+      "x": 196.0,
+      "y": 376.0
+    },
+    "destino": {
+      "id": 44,
+      "x": 216.0,
+      "y": 338.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 44,
+      "x": 216.0,
+      "y": 338.0
+    },
+    "destino": {
+      "id": 45,
+      "x": 196.0,
+      "y": 376.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 45,
+      "x": 196.0,
+      "y": 376.0
+    },
+    "destino": {
+      "id": 53,
+      "x": 210.0,
+      "y": 382.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 30,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 52,
+      "x": 242.0,
+      "y": 396.0
+    },
+    "destino": {
+      "id": 36,
+      "x": 258.0,
+      "y": 356.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 48,
+      "x": 112.0,
+      "y": 376.0
+    },
+    "destino": {
+      "id": 73,
+      "x": 36.0,
+      "y": 464.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 280,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 54,
+      "x": 364.0,
+      "y": 444.0
+    },
+    "destino": {
+      "id": 55,
+      "x": 402.0,
+      "y": 458.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 55,
+      "x": 402.0,
+      "y": 458.0
+    },
+    "destino": {
+      "id": 69,
+      "x": 442.0,
+      "y": 476.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 55,
+      "x": 402.0,
+      "y": 458.0
+    },
+    "destino": {
+      "id": 31,
+      "x": 420.0,
+      "y": 420.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 21,
+      "x": 326.0,
+      "y": 294.0
+    },
+    "destino": {
+      "id": 25,
+      "x": 270.0,
+      "y": 274.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 170,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 11,
+      "x": 358.0,
+      "y": 202.0
+    },
+    "destino": {
+      "id": 8,
+      "x": 338.0,
+      "y": 254.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 150,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 8,
+      "x": 338.0,
+      "y": 254.0
+    },
+    "destino": {
+      "id": 21,
+      "x": 326.0,
+      "y": 294.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 21,
+      "x": 326.0,
+      "y": 294.0
+    },
+    "destino": {
+      "id": 34,
+      "x": 312.0,
+      "y": 332.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 58,
+      "x": 364.0,
+      "y": 614.0
+    },
+    "destino": {
+      "id": 76,
+      "x": 362.0,
+      "y": 559.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 76,
+      "x": 362.0,
+      "y": 559.0
+    },
+    "destino": {
+      "id": 57,
+      "x": 368.0,
+      "y": 536.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 80,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 14,
+      "x": 422.0,
+      "y": 300.0
+    },
+    "destino": {
+      "id": 77,
+      "x": 472.0,
+      "y": 377.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 260,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 77,
+      "x": 472.0,
+      "y": 377.0
+    },
+    "destino": {
+      "id": 29,
+      "x": 474.0,
+      "y": 400.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 60,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 27,
+      "x": 354.0,
+      "y": 350.0
+    },
+    "destino": {
+      "id": 34,
+      "x": 312.0,
+      "y": 332.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 34,
+      "x": 312.0,
+      "y": 332.0
+    },
+    "destino": {
+      "id": 39,
+      "x": 286.0,
+      "y": 324.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 80,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 39,
+      "x": 286.0,
+      "y": 324.0
+    },
+    "destino": {
+      "id": 40,
+      "x": 266.0,
+      "y": 318.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 70,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 36,
+      "x": 258.0,
+      "y": 356.0
+    },
+    "destino": {
+      "id": 40,
+      "x": 266.0,
+      "y": 318.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 44,
+      "x": 216.0,
+      "y": 338.0
+    },
+    "destino": {
+      "id": 41,
+      "x": 228.0,
+      "y": 312.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 41,
+      "x": 228.0,
+      "y": 312.0
+    },
+    "destino": {
+      "id": 44,
+      "x": 216.0,
+      "y": 338.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 90,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 41,
+      "x": 228.0,
+      "y": 312.0
+    },
+    "destino": {
+      "id": 42,
+      "x": 182.0,
+      "y": 300.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 120,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 24,
+      "x": 222.0,
+      "y": 178.0
+    },
+    "destino": {
+      "id": 5,
+      "x": 278.0,
+      "y": 154.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 5,
+      "x": 278.0,
+      "y": 154.0
+    },
+    "destino": {
+      "id": 24,
+      "x": 222.0,
+      "y": 178.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 130,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 14,
+      "x": 422.0,
+      "y": 300.0
+    },
+    "destino": {
+      "id": 13,
+      "x": 394.0,
+      "y": 252.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 140,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 13,
+      "x": 394.0,
+      "y": 252.0
+    },
+    "destino": {
+      "id": 11,
+      "x": 358.0,
+      "y": 202.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 150,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 11,
+      "x": 358.0,
+      "y": 202.0
+    },
+    "destino": {
+      "id": 12,
+      "x": 340.0,
+      "y": 170.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 12,
+      "x": 340.0,
+      "y": 170.0
+    },
+    "destino": {
+      "id": 1,
+      "x": 280.0,
+      "y": 58.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 280,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 77,
+      "x": 472.0,
+      "y": 377.0
+    },
+    "destino": {
+      "id": 14,
+      "x": 422.0,
+      "y": 300.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 190,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 60,
+      "x": 306.0,
+      "y": 608.0
+    },
+    "destino": {
+      "id": 61,
+      "x": 262.0,
+      "y": 586.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 61,
+      "x": 262.0,
+      "y": 586.0
+    },
+    "destino": {
+      "id": 62,
+      "x": 286.0,
+      "y": 510.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 170,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 62,
+      "x": 286.0,
+      "y": 510.0
+    },
+    "destino": {
+      "id": 65,
+      "x": 298.0,
+      "y": 470.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 110,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 65,
+      "x": 298.0,
+      "y": 470.0
+    },
+    "destino": {
+      "id": 64,
+      "x": 346.0,
+      "y": 486.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  },
+  {
+    "origen": {
+      "id": 64,
+      "x": 346.0,
+      "y": 486.0
+    },
+    "destino": {
+      "id": 65,
+      "x": 298.0,
+      "y": 470.0
+    },
+    "peso": 0,
+    "isClosed": true,
+    "time": 0,
+    "longitud": 100,
+    "nivelTrafico": 1
+  }
+]
