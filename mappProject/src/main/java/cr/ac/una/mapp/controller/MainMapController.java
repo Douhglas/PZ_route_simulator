@@ -377,7 +377,6 @@ public class MainMapController extends Controller implements Initializable {
 
 
         List<Integer> caminoIds = grafo.dijkstra(origenDjikstra, destinoDjikstra);
-
         List<Arista> caminoAristas = grafo.crearCaminoDjikstra(caminoIds);
 
         if (caminoAristas == null) {
@@ -387,6 +386,7 @@ public class MainMapController extends Controller implements Initializable {
             Carro carro = new Carro(root);
             carro.crearSimulacion(caminoAristas.get(0), 3);
         }
+
     }
 
     @FXML
@@ -400,4 +400,17 @@ public class MainMapController extends Controller implements Initializable {
             carro.crearSimulacion(camino.get(0), 3);
         }
     }
+
+    private void verificarYActualizarRuta(Vertice actual, Vertice destino) {
+        if (condicionesCambiadas()) {
+            List<Integer> nuevaRuta = grafo.dijkstra(actual.getId(), destino.getId());
+            List<Arista> nuevaRutaAristas = grafo.crearCamino(nuevaRuta);
+
+            clearPath();
+            drawPath(nuevaRutaAristas);
+
+            setRutaParaMovimiento(nuevaRutaAristas);
+        }
+    }
+
 }
