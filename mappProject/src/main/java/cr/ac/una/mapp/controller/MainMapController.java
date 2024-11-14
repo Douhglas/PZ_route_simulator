@@ -132,15 +132,15 @@ public class MainMapController extends Controller implements Initializable {
                     destinoDjikstra = destino.getId();
                     destinoFloyd = destino.getId();
                     click = 0;
-                    List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
-                    if (camino == null) {
-                        System.out.println("No existe camino");
-                    } else {
-                        drawPath(camino);
-                        carro.setOrigen(origen.getId());
-                        carro.setDestino(destino.getId());
-                        carro.crearSimulacion(camino.get(0), 3);
-                    }
+//                    List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
+//                    if (camino == null) {
+//                        System.out.println("No existe camino");
+//                    } else {
+//                        drawPath(camino);
+////                        carro.setOrigen(origen.getId());
+////                        carro.setDestino(destino.getId());
+////                        carro.crearSimulacion(camino.get(0), 3);
+//                    }
 
                 }
 
@@ -334,7 +334,6 @@ public class MainMapController extends Controller implements Initializable {
     @FXML
     void onActionCalcularDjikstra(ActionEvent event) {
 
-
         List<Integer> caminoIds = grafo.dijkstra(origenDjikstra, destinoDjikstra);
 
         List<Arista> caminoAristas = grafo.crearCaminoDjikstra(caminoIds);
@@ -343,7 +342,8 @@ public class MainMapController extends Controller implements Initializable {
             System.out.println("No existe camino");
         } else {
             drawPath(caminoAristas);
-            Carro carro = new Carro(root);
+            carro.setOrigen(origen.getId());
+            carro.setDestino(destino.getId());
             carro.crearSimulacion(caminoAristas.get(0), 3);
         }
     }
@@ -355,7 +355,8 @@ public class MainMapController extends Controller implements Initializable {
             System.out.println("No existe camino");
         } else {
             drawPath(camino);
-            Carro carro = new Carro(root);
+            carro.setOrigen(origen.getId());
+            carro.setDestino(destino.getId());
             carro.crearSimulacion(camino.get(0), 3);
         }
     }

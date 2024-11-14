@@ -22,10 +22,9 @@ import javafx.util.Duration;
  */
 public class Carro {
 
-    Image carroImage = new Image(getClass().getResourceAsStream("/cr/ac/una/mapp/resources/tank.png"));
+    Image carroImage = new Image(getClass().getResourceAsStream("/cr/ac/una/mapp/resources/Car.png"));
     ImageView carroImageView = new ImageView(carroImage);
     int tiempo;
-    private Timeline timeline;
     private AnchorPane anchorPane;
     private PathTransition pathTransition;
     private Grafo grafo;
@@ -36,27 +35,28 @@ public class Carro {
 
     public Carro(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
-        //
-        carroImageView.setFitWidth(20);
-        carroImageView.setFitHeight(20);
-    }
-
-    public void mostrarCarro() {
-        // Crear un cuadrado para representar el vehículo
-        Rectangle cuadrado = new Rectangle(20, 20); // Tamaño del cuadrado
-        cuadrado.setFill(Color.BLACK);
+        carroImageView.setFitWidth(40);
+        carroImageView.setFitHeight(35);
     }
 
     public void crearSimulacion(Arista arista, int tiempoAnimacion) {
         anchorPane.getChildren().remove(carroImageView);
 
-        // Crear línea de la arista
+        // Configurar la línea de la arista
         Line ruta = new Line();
         ruta.setStartX(arista.getOrigen().getX());
         ruta.setStartY(arista.getOrigen().getY());
         ruta.setEndX(arista.getDestino().getX());
         ruta.setEndY(arista.getDestino().getY());
         siguienteNodo = arista.getDestino().getId();
+
+        // Calcular el ángulo de rotación para que el carro apunte hacia el siguiente nodo
+        double deltaX = arista.getDestino().getX() - arista.getOrigen().getX();
+        double deltaY = arista.getDestino().getY() - arista.getOrigen().getY();
+        double angle = Math.toDegrees(Math.atan2(deltaY, deltaX));
+
+        // Aplicar rotación a la imagen del carro
+        carroImageView.setRotate(angle);
 
         // Configurar la transición para mover el carro a lo largo de la línea
         pathTransition = new PathTransition();
@@ -65,18 +65,19 @@ public class Carro {
         pathTransition.setDuration(Duration.seconds(tiempoAnimacion));
         pathTransition.setCycleCount(1);
 
-        // Agregar el carro al AnchorPane
+        // Agregar el carro al AnchorPane y reproducir la animación
         anchorPane.getChildren().add(carroImageView);
         pathTransition.play();
+        
+        // Cuando finalice la transición, decidir el siguiente movimiento
         pathTransition.setOnFinished(event -> {
-           if(origen != destino){
+           if (origen != destino) {
                origen = siguienteNodo;
-               
                List<Arista> camino = grafo.floydWarshall(origen, destino);
-               if(camino == null){
+               if (camino == null) {
                    return;
                }
-               crearSimulacion(camino.get(0), 4);
+               crearSimulacion(camino.get(0), tiempoAnimacion);
            }
         });
     }
@@ -104,7 +105,4 @@ public class Carro {
     public void setDestino(Integer destino) {
         this.destino = destino;
     }
-    
-    
-    
 }
