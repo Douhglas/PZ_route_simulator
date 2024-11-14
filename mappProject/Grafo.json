@@ -1,0 +1,77 @@
+{
+  "vertices": [
+    {
+      "id": 0,
+      "x": 277.0,
+      "y": 56.0
+    },
+    {
+      "id": 1,
+      "x": 344.0,
+      "y": 174.0
+    }
+  ],
+  "matrizAdyacencia": [
+    [
+      {
+        "peso": 2147483647,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      {
+        "origen": {
+          "id": 0,
+          "x": 277.0,
+          "y": 56.0
+        },
+        "destino": {
+          "id": 1,
+          "x": 344.0,
+          "y": 174.0
+        },
+        "peso": 545,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      }
+    ],
+    [
+      {
+        "peso": 2147483647,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      },
+      {
+        "peso": 2147483647,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 0,
+        "nivelTrafico": 1
+      }
+    ]
+  ],
+  "aristas": [
+    {
+      "origen": {
+        "id": 0,
+        "x": 277.0,
+        "y": 56.0
+      },
+      "destino": {
+        "id": 1,
+        "x": 344.0,
+        "y": 174.0
+      },
+      "peso": 545,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 0,
+      "nivelTrafico": 1
+    }
+  ]
+}

@@ -66,41 +66,54 @@ public class MainMapController extends Controller implements Initializable {
     public void initialize() {
         //elimianr lo que haya limpiar todo y despues cargar los nodos
         origen = new Vertice();
-        aristas = AppManager.getInstance().cargar();
-        if (aristas != null && !aristas.isEmpty()) {
-            for (Arista arista : aristas) {
-                // Asignar la arista al destino en la lista de "recibidas"
-                Vertice destino1 = verticeExistente(arista.getDestino());
-                arista.setPeso(arista.getLongitud() * arista.getNivelTrafico());
-                arista.setIsClosed(Boolean.FALSE);
-                if (destino1 == null) {
-                    vertices.add(arista.getDestino());
-                    arista.getDestino().getRecibidas().add(arista);
-                } else {
-                    destino1.getRecibidas().add(arista);
-                }
-                Vertice origen1 = verticeExistente(arista.getOrigen());
+        grafo = AppManager.getInstance().cargar();
 
-                if (origen1 == null) {
-                    vertices.add(arista.getOrigen());
-                    arista.getOrigen().getAristas().add(arista);
-                } else {
-                    origen1.getAristas().add(arista);
-                }
-
-                // Dibujar la línea que representa la arista
-                drawLine(arista);
-            }
+        if (grafo != null && !grafo.getVertices().isEmpty()) {
+           for(Vertice vertice : grafo.getVertices()){
+               colocarCirculo(vertice);
+           }
+           for(Arista arista : grafo.getAristas()){
+               drawLine(arista);
+               System.out.println("mvof" +arista.getPeso());
+           }
         } else {
-            System.out.println("No hay aristas");
+            System.out.println("Grafo nulo");
         }
-        if (vertices != null && !vertices.isEmpty()) {
-            for (Vertice vertice : vertices) {
-                colocarCirculo(vertice);
-            }
-            this.grafo = new Grafo(aristas);
-            this.grafo.mostrarMatrizAdyacencia();
-        }
+//        if (aristas != null && !aristas.isEmpty()) {
+//            for (Arista arista : aristas) {
+//                // Asignar la arista al destino en la lista de "recibidas"
+//                Vertice destino1 = verticeExistente(arista.getDestino());
+//                arista.setPeso(arista.getLongitud() * arista.getNivelTrafico());
+//                arista.setIsClosed(Boolean.FALSE);
+//                if (destino1 == null) {
+//                    vertices.add(arista.getDestino());
+//                    arista.getDestino().getRecibidas().add(arista);
+//                } else {
+//                    destino1.getRecibidas().add(arista);
+//                }
+//                Vertice origen1 = verticeExistente(arista.getOrigen());
+//
+//                if (origen1 == null) {
+//                    vertices.add(arista.getOrigen());
+//                    arista.getOrigen().getAristas().add(arista);
+//                } else {
+//                    origen1.getAristas().add(arista);
+//                }
+//
+//                // Dibujar la línea que representa la arista
+//                drawLine(arista);
+//            }
+//        } else {
+//            System.out.println("No hay aristas");
+//        }
+//        if (vertices != null && !vertices.isEmpty()) {
+//            for (Vertice vertice : vertices) {
+//                colocarCirculo(vertice);
+//            }
+//          //  this.grafo = new Grafo();
+//            //this.grafo = new Grafo(aristas);
+//          //  this.grafo.mostrarMatrizAdyacencia();
+//        }
  
 
     }
@@ -113,7 +126,7 @@ public class MainMapController extends Controller implements Initializable {
 
         circle.setUserData(vertice);
         circulos.add(circle);
-        System.out.println("se creo un circulo");
+        System.out.println("se creo un circulo ");
 
         root.getChildren().add(circle);
 
@@ -124,19 +137,20 @@ public class MainMapController extends Controller implements Initializable {
                 //e iniciar la animacion
                 //cuando se inicia la animacion y llega a un nodo entonces se recalcula la ruta y si da otra entonces marcarla con otro color
                 //en el grafo y mostrarla
-                System.out.println("click en circulo");
+                System.out.println("click en circulo : " );
                 if (click == 0) {
                     origen = (Vertice) circle.getUserData();
                     click++;
 
                 } else if (click == 1 && origen != (Vertice) circle.getUserData()) {
                     destino = (Vertice) circle.getUserData();
+                    System.out.println("Peso entre " + origen.getId() + " y " + destino.getId() + " "+ grafo.getPeso(origen, destino)  );
                     click = 0;
-                   List<Vertice> camino = grafo.dijkstra(origen.getId(), destino.getId());
-                    drawPath(camino);
-                    for(Vertice c : camino){
-                     System.out.println(c.getId() + " ");
-                    }
+//                   List<Vertice> camino = grafo.dijkstra(origen.getId(), destino.getId());
+//                    drawPath(camino);
+//                    for(Vertice c : camino){
+//                     System.out.println(c.getId() + " ");
+//                    }
                   
                     //calcular ruta y dibujarla
                     //ventana de empezar recorrido elegir algoritmo y mas 
@@ -384,5 +398,4 @@ public class MainMapController extends Controller implements Initializable {
         }
         lineas.clear();
     }
-
 }

@@ -15,6 +15,7 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="648.0" layoutY="4.0" prefHeight="648.0" prefWidth="292.0">
          <children>
+            <Button mnemonicParsing="false" onAction="#mostrarMatriz" text="Mostrar Matriz" />
             <Button mnemonicParsing="false" onAction="#guardarAction" prefHeight="25.0" prefWidth="158.0" text="guardar configuracion" />
             <Button mnemonicParsing="false" onAction="#cargarAction" prefHeight="25.0" prefWidth="158.0" text="Cargar configuracion" />
             <Button mnemonicParsing="false" text="Button" />

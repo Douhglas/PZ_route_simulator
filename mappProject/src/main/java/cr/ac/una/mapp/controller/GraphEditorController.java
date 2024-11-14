@@ -1,6 +1,7 @@
 package cr.ac.una.mapp.controller;
 
 import cr.ac.una.mapp.model.Arista;
+import cr.ac.una.mapp.model.Grafo;
  
 import cr.ac.una.mapp.model.Vertice;
 import cr.ac.una.mapp.util.AppManager;
@@ -46,6 +47,7 @@ public class GraphEditorController extends Controller implements Initializable {
     private List<Vertice> vertices = new ArrayList<>();
     private List<Arista> aristas = new ArrayList<>();
     private int index = 0;
+    Grafo grafo =  new Grafo();
 
 
     /**
@@ -77,6 +79,7 @@ public class GraphEditorController extends Controller implements Initializable {
         circle.setUserData(vertice);
         circulos.add(circle);
         System.out.println("se creo un circulo");
+        grafo.agregarVertice(vertice);
 
         root.getChildren().add(circle);
 
@@ -103,7 +106,6 @@ public class GraphEditorController extends Controller implements Initializable {
     }
 
     private void drawLine(Arista arista) {
-        setDistanciaVentana(arista);
         double offset = 10;
 
         double startX = arista.getOrigen().getX();
@@ -199,6 +201,7 @@ public class GraphEditorController extends Controller implements Initializable {
             destinoV.getRecibidas().add(arista);
             arista.setDestino(destinoV);
             arista.setOrigen(origenV);
+            setDistanciaVentana(arista);
             aristas.add(arista);
             drawLine(arista);
             origen = null;
@@ -272,7 +275,8 @@ public class GraphEditorController extends Controller implements Initializable {
                     throw new NumberFormatException("La longitud debe ser mayor que cero.");
                 }
 
-                arista.setLongitud(longitud);
+                arista.setPeso(longitud);
+                grafo.agregarArista(arista);
 
                 ventana.close();
             } catch (NumberFormatException e) {
@@ -297,7 +301,7 @@ public class GraphEditorController extends Controller implements Initializable {
     @FXML
     private void guardarAction(ActionEvent event) {
 
-        AppManager.guardar(aristas);
+        AppManager.guardar(grafo);
         System.out.println("Guardado exitoso");
     }
 
@@ -411,5 +415,10 @@ public class GraphEditorController extends Controller implements Initializable {
             }
         }
         return false;
+    }
+
+    @FXML
+    private void mostrarMatriz(ActionEvent event) {
+        grafo.mostrarMatrizAdyacenciaActual();
     }
 }
