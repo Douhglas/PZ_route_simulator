@@ -6,10 +6,14 @@ package cr.ac.una.mapp.model;
 
 import java.util.List;
 import javafx.animation.KeyFrame;
+import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
@@ -18,60 +22,87 @@ import javafx.util.Duration;
  */
 public class Carro {
 
-    Image carroImage = new Image(getClass().getResourceAsStream("/cr/ac/una/mapp/resources/tank.png"));
+    Image carroImage = new Image(getClass().getResourceAsStream("/cr/ac/una/mapp/resources/Car.png"));
     ImageView carroImageView = new ImageView(carroImage);
     int tiempo;
-    private Timeline timeline;
-    private AnchorPane anchiorPane;
+    private AnchorPane anchorPane;
+    private PathTransition pathTransition;
+    private Grafo grafo;
+    
+    private Integer origen;
+    private Integer siguienteNodo;
+    private Integer destino;
 
     public Carro(AnchorPane anchorPane) {
-        anchiorPane = anchorPane;
-        anchorPane.getChildren().add(carroImageView);
-        carroImageView.setFitWidth(20);
-        carroImageView.setFitHeight(20);
+        this.anchorPane = anchorPane;
+        carroImageView.setFitWidth(40);
+        carroImageView.setFitHeight(35);
     }
 
-    // El método recibe una Arista y el tiempo de duración de la animación
     public void crearSimulacion(Arista arista, int tiempoAnimacion) {
-        // Obtenemos los nodos origen y destino de la arista
-        Vertice origen = arista.getOrigen();
-        Vertice destino = arista.getDestino();
+        anchorPane.getChildren().remove(carroImageView);
 
-        // Coordenadas de los nodos origen y destino
-        double x1 = origen.getX();
-        double y1 = origen.getY();
-        double x2 = destino.getX();
-        double y2 = destino.getY();
+        // Configurar la línea de la arista
+        Line ruta = new Line();
+        ruta.setStartX(arista.getOrigen().getX());
+        ruta.setStartY(arista.getOrigen().getY());
+        ruta.setEndX(arista.getDestino().getX());
+        ruta.setEndY(arista.getDestino().getY());
+        siguienteNodo = arista.getDestino().getId();
+
+        // Calcular el ángulo de rotación para que el carro apunte hacia el siguiente nodo
+        double deltaX = arista.getDestino().getX() - arista.getOrigen().getX();
+        double deltaY = arista.getDestino().getY() - arista.getOrigen().getY();
+        double angle = Math.toDegrees(Math.atan2(deltaY, deltaX));
+
+        // Aplicar rotación a la imagen del carro
+        carroImageView.setRotate(angle);
+
+        // Configurar la transición para mover el carro a lo largo de la línea
+        pathTransition = new PathTransition();
+        pathTransition.setNode(carroImageView);
+        pathTransition.setPath(ruta);
+        pathTransition.setDuration(Duration.seconds(tiempoAnimacion));
+        pathTransition.setCycleCount(1);
+
+        // Agregar el carro al AnchorPane y reproducir la animación
+        anchorPane.getChildren().add(carroImageView);
+        pathTransition.play();
         
-
-        // Establecer el tiempo de animación de la arista
-        this.tiempo = arista.getTime(); // Tiempo en el que se realizará la animación
-        if (tiempoAnimacion > 0) {
-            tiempo = tiempoAnimacion; // Si se pasa un tiempo, se utiliza ese valor
-        }
-
-        // Crear una animación que mueva el carro de la posición inicial a la final
-        timeline = new Timeline();
-        timeline.setCycleCount(1); // Solo una vez
-
-        // Configurar la animación del movimiento
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(tiempo), e -> {
-            // Movimiento del carro de (x1, y1) a (x2, y2)
-            carroImageView.setX(x1);
-            carroImageView.setY(y1);
-
-            Timeline moveCarro = new Timeline();
-            moveCarro.getKeyFrames().add(
-                    new KeyFrame(Duration.seconds(tiempo),
-                            new javafx.animation.KeyValue(carroImageView.xProperty(), x2),
-                            new javafx.animation.KeyValue(carroImageView.yProperty(), y2)
-                    ));
-            moveCarro.play();
+        // Cuando finalice la transición, decidir el siguiente movimiento
+        pathTransition.setOnFinished(event -> {
+           if (origen != destino) {
+               origen = siguienteNodo;
+               List<Arista> camino = grafo.floydWarshall(origen, destino);
+               if (camino == null) {
+                   return;
+               }
+               crearSimulacion(camino.get(0), tiempoAnimacion);
+           }
         });
+    }
 
+    public AnchorPane getAnchorPane() {
+        return anchorPane;
+    }
 
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.play();
-        
+    public void setAnchorPane(AnchorPane anchorPane) {
+        this.anchorPane = anchorPane;
+    }
+    
+    public PathTransition getPathTransition(){
+        return pathTransition;
+    }
+
+    public void setGrafo(Grafo grafo) {
+        this.grafo = grafo;
+    }
+
+    public void setOrigen(Integer origen) {
+        this.origen = origen;
+    }
+
+    public void setDestino(Integer destino) {
+        this.destino = destino;
     }
 }

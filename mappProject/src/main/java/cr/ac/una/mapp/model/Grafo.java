@@ -19,6 +19,8 @@ public class Grafo {
     private List<Arista> aristas;
     @Expose
     private int[][] predecesor;
+    
+    
 
     public Grafo() {
         vertices = new ArrayList<>();

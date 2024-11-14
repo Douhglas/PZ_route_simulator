@@ -21,6 +21,7 @@ public class Arista {
     private Integer longitud;
     @Expose
     private Integer nivelTrafico;
+    
     public Arista() {
         this.origen = null;
         this.destino = null;
