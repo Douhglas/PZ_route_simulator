@@ -25,6 +25,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -48,6 +49,12 @@ public class MainMapController extends Controller implements Initializable {
     private Button btnInfo;
     @FXML
     private ImageView mapaImg;
+    @FXML
+    private Spinner<?> spinnerTrafico;
+    @FXML
+    private CheckBox checkBoxCerrado;
+
+
     private List<Vertice> vertices = new ArrayList<>();
     private List<Arista> aristas = new ArrayList<>();
     private List<Circle> circulos = new ArrayList<>();
@@ -59,8 +66,6 @@ public class MainMapController extends Controller implements Initializable {
     private Line arrowB;
     private Vertice destino;
     private Integer click = 0;
-    
-    
     private Carro carro = new Carro(root);
     private List<Arista> caminoActual;
     private List<List<Arista>> caminosRecorridos; 
@@ -79,6 +84,10 @@ public class MainMapController extends Controller implements Initializable {
     int destinoFloyd = 0;
 
     Color color;
+
+    Arista aristaSeleccionada;
+
+    private Line lineaSeleccionada = null;
 
     /**
      * Initializes the controller class.
@@ -104,9 +113,38 @@ public class MainMapController extends Controller implements Initializable {
            }
            for(Arista arista : grafo.getAristas()){
                drawLine(arista, Color.RED);
+
            }
         } else {
             System.out.println("Grafo nulo");
+        }
+
+        mapaImg.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            Line lineaCercana = obtenerLineaCercana(event.getX(), event.getY());
+
+            if (lineaCercana != null) {
+                seleccionarLinea(lineaCercana);
+            }
+        });
+
+
+    }
+
+    private void seleccionarLinea(Line linea) {
+        if (linea == lineaSeleccionada) {
+            lineaSeleccionada.setStroke(Color.TRANSPARENT);
+            lineaSeleccionada.setStrokeWidth(2);
+            lineaSeleccionada = null;
+        } else {
+            if (lineaSeleccionada != null) {
+                lineaSeleccionada.setStroke(Color.TRANSPARENT);
+                lineaSeleccionada.setStrokeWidth(2);
+            }
+
+            lineaSeleccionada = linea;
+            lineaSeleccionada.setStroke(Color.YELLOW);
+            lineaSeleccionada.setStrokeWidth(3);
+            System.out.printf("Arista seleccionada: " + linea.getUserData().toString());
         }
     }
 
@@ -192,7 +230,7 @@ public class MainMapController extends Controller implements Initializable {
 
     private void drawArrow(Line line) {
         if (lineaAnterior != null) {
-            lineaAnterior.setStroke(Color.TRANSPARENT); // Volver a color original
+            lineaAnterior.setStroke(Color.TRANSPARENT);
 
             arrowA.setStroke(Color.TRANSPARENT);
             arrowB.setStroke(Color.TRANSPARENT);
@@ -230,7 +268,7 @@ public class MainMapController extends Controller implements Initializable {
 
     private Vertice verticeExistente(Vertice verticeBuscado) {
         for (Vertice v : vertices) {
-            if (v.equals(verticeBuscado)) { 
+            if (v.equals(verticeBuscado)) {
                 return v;
             }
         }
@@ -363,6 +401,8 @@ public class MainMapController extends Controller implements Initializable {
             carro.setOrigen(origen.getId());
             carro.setDestino(destino.getId());
             carro.crearSimulacion(camino.get(0), 3);
+
+            AppContext.getInstance().set("caminoInicial", camino);
         }
     }
 
@@ -383,16 +423,86 @@ public class MainMapController extends Controller implements Initializable {
     void onActionAbrirInfo(ActionEvent event) {
         System.out.println("Cambiando...");
 
-        for(Arista arista : grafo.getAristas()){
-            System.out.println("Aristas antes: " +arista.getPeso());
+        for (Arista arista : grafo.getAristas()) {
+            System.out.println("Aristas antes: " + arista.getPeso());
         }
         grafo.mostrarMatrizAdyacenciaActual();
         grafo.matrizAdyacencia.get(1).get(2).setPeso(2000);
-        for(Arista arista : grafo.getAristas()){
-            System.out.println("Aristas después: " +arista.getPeso());
+        for (Arista arista : grafo.getAristas()) {
+            System.out.println("Aristas después: " + arista.getPeso());
         }
         grafo.mostrarMatrizAdyacenciaActual();
         AppContext.getInstance().set("grafo", grafo);
     }
+
+    @FXML
+    void onActionGuardarCambios(ActionEvent event) {
+        if (lineaSeleccionada == null) {
+            System.out.println("No hay una arista seleccionada para modificar.");
+            return;
+        }
+
+
+
+        Arista aristaSeleccionada = (Arista) lineaSeleccionada.getUserData();
+
+        System.out.println("Arista antes: " + aristaSeleccionada);
+        grafo.mostrarMatrizAdyacenciaActual();
+
+        int nuevoNivelTrafico = (int) spinnerTrafico.getValue();
+        boolean isClosed = checkBoxCerrado.isSelected();
+
+        aristaSeleccionada.setLongitud(22);
+        aristaSeleccionada.setNivelTrafico(nuevoNivelTrafico);
+        aristaSeleccionada.setIsClosed(isClosed);
+        aristaSeleccionada.setPeso(aristaSeleccionada.getLongitud() * nuevoNivelTrafico);
+
+        int idOrigen = aristaSeleccionada.getOrigen().getId();
+        int idDestino = aristaSeleccionada.getDestino().getId();
+        grafo.matrizAdyacencia.get(idOrigen).set(idDestino, aristaSeleccionada);
+
+        System.out.println("Arista modificada: " + aristaSeleccionada);
+        grafo.mostrarMatrizAdyacenciaActual();
+
+        AppContext.getInstance().set("grafo", grafo);
+    }
+
+
+    private Line obtenerLineaCercana(double clickX, double clickY) {
+        Line lineaCercana = null;
+        double distanciaMinima = 15;
+
+        for (Line line : lineas) {
+            double distancia = distanciaPuntoSegmento(clickX, clickY, line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
+
+            if (distancia < distanciaMinima) {
+                distanciaMinima = distancia;
+                lineaCercana = line;
+            }
+        }
+        return lineaCercana;
+    }
+
+    private double distanciaPuntoSegmento(double px, double py, double x1, double y1, double x2, double y2) {
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        if (dx == 0 && dy == 0) {
+            dx = px - x1;
+            dy = py - y1;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        double t = ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy);
+        t = Math.max(0, Math.min(1, t));
+
+        double proyX = x1 + t * dx;
+        double proyY = y1 + t * dy;
+
+        dx = px - proyX;
+        dy = py - proyY;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+
 
 }

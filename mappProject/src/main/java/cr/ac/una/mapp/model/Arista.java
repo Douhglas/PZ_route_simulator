@@ -95,5 +95,18 @@ public class Arista {
     public void setDisponibilidad(Boolean disponibilidad) {
         this.isClosed = disponibilidad;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Arista {" +
+                "origen=" + (origen != null ? origen.getId() : "null") +
+                ", destino=" + (destino != null ? destino.getId() : "null") +
+                ", peso=" + peso +
+                ", isClosed=" + isClosed +
+                ", time=" + time +
+                ", longitud=" + longitud +
+                ", nivelTrafico=" + nivelTrafico +
+                '}';
+    }
+
 }

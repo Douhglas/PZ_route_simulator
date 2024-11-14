@@ -6,6 +6,7 @@ package cr.ac.una.mapp.model;
 
 import java.util.List;
 
+import cr.ac.una.mapp.controller.MainMapController;
 import cr.ac.una.mapp.util.AppContext;
 import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
