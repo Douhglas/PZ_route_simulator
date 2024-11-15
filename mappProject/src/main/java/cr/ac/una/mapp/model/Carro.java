@@ -8,6 +8,7 @@ import java.util.List;
 
 import cr.ac.una.mapp.controller.MainMapController;
 import cr.ac.una.mapp.util.AppContext;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ import javafx.animation.Timeline;
 import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +29,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
- *
  * @author Ahab
  */
 public class Carro {
@@ -51,10 +52,12 @@ public class Carro {
     private static final double COSTO_POR_SEGUNDO = 0.5;
     private static final double COSTO_POR_PESO = 1.0;
 
+    private Integer tiempoFinal = 0;
+
 
     public Carro(AnchorPane anchorPane) {
-        caminoOriginal =  new ArrayList<>();
-        caminoRecorrido =  new ArrayList<>();
+        caminoOriginal = new ArrayList<>();
+        caminoRecorrido = new ArrayList<>();
         this.anchorPane = anchorPane;
         carroImageView.setFitWidth(40);
         carroImageView.setFitHeight(35);
@@ -308,13 +311,26 @@ public class Carro {
     private void mostrarCostoFinal() {
         double costoTotal = costoTotalTiempo + costoTotalPeso;
 
+        int segundosTotales = (int) (costoTotalTiempo / COSTO_POR_SEGUNDO);
+        int minutosSimulados = segundosTotales / 4;
+
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Costo del recorrido");
             alert.setHeaderText("Recorrido finalizado");
-            alert.setContentText(
-                            "Costo total del recorrido: " + costoTotal
+            String contenido = String.format(
+                    "Duración del viaje (simulada): %d minutos\n" +
+                            "Costo total del recorrido: %.2f",
+                    minutosSimulados,
+                    costoTotal
             );
+
+            alert.setContentText(contenido);
+
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/cr/ac/una/mapp/views/style.css").toExternalForm());
+            dialogPane.getStyleClass().add("dark-alert");
+
             alert.showAndWait();
         });
 
@@ -322,26 +338,16 @@ public class Carro {
         costoTotalPeso = 0;
     }
 
-    public void limpiarRastro() {
-        System.out.println("Limpiando el rastro del carro...");
-        // Eliminar líneas y el carro del AnchorPane
-        anchorPane.getChildren().remove(carroImageView);
-        // Aquí puedes limpiar cualquier otra cosa que el carro haya dibujado
-    }
 
     public void limpiarRecorrido() {
         System.out.println("Limpiando el recorrido del carro...");
 
-        // Eliminar todas las líneas dibujadas por el carro
         anchorPane.getChildren().removeIf(node -> node instanceof Line);
 
-        // Eliminar el vehículo (carro)
         anchorPane.getChildren().remove(carroImageView);
 
-        // Reiniciar lista de camino recorrido
         caminoRecorrido.clear();
 
-        // Reiniciar costos acumulados
         costoTotalPeso = 0;
         costoTotalTiempo = 0;
 

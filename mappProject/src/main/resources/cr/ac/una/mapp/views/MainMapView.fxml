@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ToggleButton?>
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.MainMapController">
     <children>
         <!-- Barra de título personalizada -->
@@ -25,7 +26,7 @@
 
         <HBox layoutY="35">
         <children>
-                <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true">
+                <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true" onMouseClicked="#onMouseClickedMapa">
                     <image>
                         <Image url="@../resources/map.png" />
                     </image>
@@ -55,6 +56,9 @@
                         <Separator prefWidth="200" />
 
                         <Button fx:id="btnInfo" onAction="#onActionNuevaRuta" prefWidth="200" text="Nueva Ruta" />
+
+                        <ToggleButton fx:id="toggleOcultarPuntos" onAction="#onActionOcultarPuntos" text="Ocultar/Mostrar Puntos" prefWidth="200" />
+
 
                     </children>
                 </VBox>

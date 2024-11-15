@@ -8,6 +8,7 @@ import cr.ac.una.mapp.util.AppContext;
 import cr.ac.una.mapp.util.AppManager;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
@@ -92,6 +93,9 @@ public class MainMapController extends Controller implements Initializable {
     @FXML
     private Button btnDijkstra;
 
+    @FXML
+    private ToggleButton toggleOcultarPuntos;
+
     int origenDjikstra = 0;
 
     int destinoDjikstra = 0;
@@ -120,7 +124,6 @@ public class MainMapController extends Controller implements Initializable {
         inicializarOnActions();
 
 
-        //elimianr lo que haya limpiar todo y despues cargar los nodos
         origen = new Vertice();
         carro.setAnchorPane(root);
 
@@ -156,7 +159,6 @@ public class MainMapController extends Controller implements Initializable {
             stage.setIconified(true);
         });
 
-        // Acción para el botón de maximizar/restaurar
         maximizeButton.setOnAction(event -> {
             Stage stage = (Stage) maximizeButton.getScene().getWindow();
             if (stage.isMaximized()) {
@@ -166,7 +168,6 @@ public class MainMapController extends Controller implements Initializable {
             }
         });
 
-        // Acción para el botón de cerrar
         closeButton.setOnAction(event -> {
             Stage stage = (Stage) closeButton.getScene().getWindow();
             stage.close();
@@ -223,9 +224,7 @@ public class MainMapController extends Controller implements Initializable {
         circle.setOnMouseExited(e -> circle.setRadius(3));
     }
 
-    /**
-     * Resalta las aristas adyacentes desde el nodo origen, mostrando las conexiones.
-     */
+
     private void resaltarAristasAdyacentes(Vertice origen) {
         int origenId = origen.getId();
 
@@ -245,9 +244,6 @@ public class MainMapController extends Controller implements Initializable {
     }
 
 
-    /**
-     * Oculta las aristas adyacentes después de seleccionar el nodo destino.
-     */
     private void ocultarAristasAdyacentes(Vertice origen, Arista aristaSeleccionada) {
         int origenId = origen.getId();
         List<Arista> aristasOrigen = grafo.matrizAdyacencia.get(origenId);
@@ -257,25 +253,20 @@ public class MainMapController extends Controller implements Initializable {
                 Line line = encontrarLineaPorArista(arista);
 
                 if (line != null) {
-                    line.setStroke(Color.TRANSPARENT);  // Oculta la línea de conexión
-                    line.setVisible(false);             // Hacer la línea invisible temporalmente
+                    line.setStroke(Color.TRANSPARENT);
+                    line.setVisible(false);
                 }
             }
         }
     }
 
-    /**
-     * Selecciona y resalta la arista entre el nodo origen y destino especificados.
-     */
     private Arista seleccionarAristaEntreOrigenYDestino(Vertice origen, Vertice destino) {
         int origenId = origen.getId();
         int destinoId = destino.getId();
 
-        // Obtener la arista desde la matriz de adyacencia
         Arista arista = grafo.matrizAdyacencia.get(origenId).get(destinoId);
 
         if (arista != null) {
-            // Si la arista es válida, buscar y resaltar su línea correspondiente
             Line line = encontrarLineaPorArista(arista);
             if (line != null) {
                 line.setStroke(Color.YELLOW);
@@ -283,10 +274,8 @@ public class MainMapController extends Controller implements Initializable {
                 line.setVisible(true);
                 System.out.println("Arista seleccionada entre " + origenId + " y " + destinoId);
 
-                // Asignar la línea seleccionada
                 lineaSeleccionada = line;
 
-                // Ocultar todas las otras aristas
                 for (Line otherLine : lineas) {
                     if (otherLine != line) {
                         otherLine.setStroke(Color.TRANSPARENT);
@@ -298,25 +287,23 @@ public class MainMapController extends Controller implements Initializable {
             System.out.println("No se encontró una arista entre " + origenId + " y " + destinoId);
             lineaSeleccionada = null;
 
-            // Si no hay una arista válida, ocultar todas las aristas
             for (Line line : lineas) {
                 line.setStroke(Color.TRANSPARENT);
                 line.setVisible(false);
             }
         }
 
-        return arista; // Retornar la arista seleccionada o null si no se encontró
+        return arista;
     }
-
 
     private Line encontrarLineaPorArista(Arista arista) {
         for (Line line : lineas) {
             //System.out.println(line.getUserData());
-            if (arista.equals(line.getUserData())) {  // Usando equals para comparar por contenido
+            if (arista.equals(line.getUserData())) {
                 return line;
             }
         }
-        return null; // No se encontró ninguna línea correspondiente
+        return null;
     }
 
     private void drawLine(Arista arista, Paint color) {
@@ -384,17 +371,7 @@ public class MainMapController extends Controller implements Initializable {
         root.getChildren().addAll(arrow1, arrow2);
     }
 
-    private Vertice verticeExistente(Vertice verticeBuscado) {
-        for (Vertice v : vertices) {
-            if (v.equals(verticeBuscado)) {
-                return v;
-            }
-        }
-        return null;
-    }
-
     public void mostrarRutasDeVertice(Vertice verticeSeleccionado) {
-        // Crear ventana nueva para mostrar las rutas
         Stage stage = new Stage();
         stage.setTitle("Rutas desde el vértice " + verticeSeleccionado.getId());
 
@@ -417,20 +394,16 @@ public class MainMapController extends Controller implements Initializable {
             }
         });
 
-        // Controles para editar la ruta seleccionada
         Label labelSeleccionada = new Label("Selecciona una ruta para editar:");
         CheckBox checkBoxCerrado = new CheckBox("Calle cerrada");
         Spinner<Integer> spinnerTrafico = new Spinner<>(1, 3, 1);
         spinnerTrafico.setEditable(false);
 
-        // Acción al seleccionar una ruta en la lista
         listaRutas.getSelectionModel().selectedItemProperty().addListener((obs, oldRuta, nuevaRuta) -> {
             if (nuevaRuta != null) {
-                // Actualizar valores de los controles con los valores de la arista seleccionada
                 checkBoxCerrado.setSelected(nuevaRuta.getIsClosed());
                 spinnerTrafico.getValueFactory().setValue(nuevaRuta.getNivelTrafico());
                 nuevaRuta.setPeso(nuevaRuta.getLongitud() * nuevaRuta.getNivelTrafico());
-                // Resaltar ruta seleccionada en la ventana principal
                 drawLine(nuevaRuta, Color.CADETBLUE);
             }
         });
@@ -466,7 +439,8 @@ public class MainMapController extends Controller implements Initializable {
     }
 
     public void drawPath(List<Arista> aristas) {
-        clearPath(); // Limpia solo la lista lineasRuta
+        clearPath();
+
         for (Arista arista : aristas) {
             Line line = new Line();
             line.setStrokeWidth(4);
@@ -474,12 +448,28 @@ public class MainMapController extends Controller implements Initializable {
             line.setStartY(arista.getOrigen().getY());
             line.setEndX(arista.getDestino().getX());
             line.setEndY(arista.getDestino().getY());
-            line.setStroke(Color.BLUE);
 
+
+            switch (arista.getNivelTrafico()) {
+                case 1:
+                    line.setStroke(Color.BLUE);
+                    break;
+                case 2:
+                    line.setStroke(Color.YELLOW);
+                    break;
+                case 3:
+                    line.setStroke(Color.RED);
+                    break;
+                default:
+                    line.setStroke(Color.GRAY);
+                    break;
+            }
+            line.setUserData(arista);
             root.getChildren().add(2, line);
             lineasRuta.add(line);
         }
     }
+
 
 
 
@@ -501,7 +491,7 @@ public class MainMapController extends Controller implements Initializable {
         System.out.println("Dijkstra");
         if (caminoAristas == null || caminoAristas.isEmpty()) {
             System.out.println("No se encontró un camino entre " + origenDjikstra + " y " + destinoDjikstra);
-            return; // Evitar ejecutar el siguiente código si el camino no existe
+            return;
         }
 
         if (caminoAristas == null) {
@@ -545,13 +535,9 @@ public class MainMapController extends Controller implements Initializable {
     void onActionNuevaRuta(ActionEvent event) {
         System.out.println("Iniciando limpieza para nueva ruta...");
 
-        // Limpiar la ruta inicial trazada en el mapa
         clearPath();
 
-        // Limpiar el recorrido y trazo del carro
         carro.limpiarRecorrido();
-
-        // Reiniciar variables de origen y destino
         origen = null;
         destino = null;
 
@@ -566,12 +552,9 @@ public class MainMapController extends Controller implements Initializable {
             return;
         }
 
-
-
         Arista aristaSeleccionada = (Arista) lineaSeleccionada.getUserData();
 
         System.out.println("Arista antes: " + aristaSeleccionada);
-        //grafo.mostrarMatrizAdyacenciaActual();
 
         int nuevoNivelTrafico = (int) spinnerTrafico.getValue();
         boolean isClosed = checkBoxCerrado.isSelected();
@@ -586,14 +569,42 @@ public class MainMapController extends Controller implements Initializable {
         int idDestino = aristaSeleccionada.getDestino().getId();
         grafo.matrizAdyacencia.get(idOrigen).set(idDestino, aristaSeleccionada);
 
-        System.out.println("Arista modificada: " + aristaSeleccionada);
-        grafo.mostrarMatrizAdyacenciaActual();
+        for (Line line : lineasRuta) {
+            Arista aristaLinea = (Arista) line.getUserData();
+            if (aristaLinea != null
+                    && aristaLinea.getOrigen().getId() == aristaSeleccionada.getOrigen().getId()
+                    && aristaLinea.getDestino().getId() == aristaSeleccionada.getDestino().getId()) {
+
+                if (aristaSeleccionada.getIsClosed()) {
+                    line.setStroke(Color.BLACK);
+                } else {
+                    switch (aristaSeleccionada.getNivelTrafico()) {
+                        case 1:
+                            line.setStroke(Color.BLUE);
+                            break;
+                        case 2:
+                            line.setStroke(Color.YELLOW);
+                            break;
+                        case 3:
+                            line.setStroke(Color.RED);
+                            break;
+                        default:
+                            line.setStroke(Color.GRAY);
+                            break;
+                    }
+                }
+                break;
+            }
+        }
 
         lineaSeleccionada.setStroke(Color.TRANSPARENT);
         lineaSeleccionada = null;
 
         AppContext.getInstance().set("grafo", grafo);
+
+        System.out.println("Arista modificada: " + aristaSeleccionada);
     }
+
 
 
     private Line obtenerLineaCercana(double clickX, double clickY) {
@@ -631,51 +642,23 @@ public class MainMapController extends Controller implements Initializable {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
-    
-    private void agregarBarraDeTitulo() {
-        // Crear la barra de título
-        HBox titleBar = new HBox();
-        titleBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 5px;");
-        titleBar.setAlignment(Pos.CENTER_RIGHT);
-        titleBar.setPrefHeight(30);
 
-        // Crear el botón de minimizar
-        Button minimizeButton = new Button("_");
-        minimizeButton.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;");
-        minimizeButton.setOnAction(event -> {
-            Stage stage = (Stage) root.getScene().getWindow();
-            stage.setIconified(true);
-        });
+    @FXML
+    void onActionOcultarPuntos(ActionEvent event) {
+        boolean ocultar = toggleOcultarPuntos.isSelected();
+        System.out.println(ocultar ? "Ocultando puntos del mapa..." : "Mostrando puntos del mapa...");
 
-        // Crear el botón de cerrar
-        Button closeButton = new Button("X");
-        closeButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;");
-        closeButton.setOnAction(event -> {
-            Stage stage = (Stage) root.getScene().getWindow();
-            stage.close();
-        });
-
-        // Agregar botones a la barra de título
-        titleBar.getChildren().addAll(minimizeButton, closeButton);
-
-        // Permitir arrastrar la ventana desde la barra de título
-        titleBar.setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-
-        titleBar.setOnMouseDragged(event -> {
-            Stage stage = (Stage) root.getScene().getWindow();
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-        });
-
-        // Añadir la barra de título al `AnchorPane`
-        root.getChildren().add(titleBar);
-        AnchorPane.setTopAnchor(titleBar, 0.0);
-        AnchorPane.setLeftAnchor(titleBar, 0.0);
-        AnchorPane.setRightAnchor(titleBar, 0.0);
+        for (Circle punto : circulos) {
+            punto.setVisible(!ocultar);
+        }
     }
+
+    @FXML
+    void onMouseClickedMapa(MouseEvent event) {
+
+    }
+
+
 
 
 }
