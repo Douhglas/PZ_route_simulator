@@ -43,6 +43,15 @@ public class MainMapController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
+
+    @FXML
+    private Button minimizeButton;
+    @FXML
+    private Button maximizeButton;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private Label titleLabel;
     @FXML
     private Button btnInfo;
     @FXML
@@ -108,6 +117,9 @@ public class MainMapController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
+        inicializarOnActions();
+
+
         //elimianr lo que haya limpiar todo y despues cargar los nodos
         origen = new Vertice();
         carro.setAnchorPane(root);
@@ -136,6 +148,29 @@ public class MainMapController extends Controller implements Initializable {
             }
         });
  
+    }
+
+    private void inicializarOnActions() {
+        minimizeButton.setOnAction(event -> {
+            Stage stage = (Stage) minimizeButton.getScene().getWindow();
+            stage.setIconified(true);
+        });
+
+        // Acción para el botón de maximizar/restaurar
+        maximizeButton.setOnAction(event -> {
+            Stage stage = (Stage) maximizeButton.getScene().getWindow();
+            if (stage.isMaximized()) {
+                stage.setMaximized(false);
+            } else {
+                stage.setMaximized(true);
+            }
+        });
+
+        // Acción para el botón de cerrar
+        closeButton.setOnAction(event -> {
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+        });
     }
 
     private void seleccionarLinea(Line linea) {
@@ -441,7 +476,7 @@ public class MainMapController extends Controller implements Initializable {
             line.setEndY(arista.getDestino().getY());
             line.setStroke(Color.BLUE);
 
-            root.getChildren().add(1, line);
+            root.getChildren().add(2, line);
             lineasRuta.add(line);
         }
     }
