@@ -90,32 +90,40 @@ public class Grafo {
         PriorityQueue<Vertice> pq = new PriorityQueue<>(Comparator.comparingInt(v -> distancias[v.getId()]));
         pq.add(vertices.get(origenId));
 
+
         while (!pq.isEmpty()) {
             Vertice actual = pq.poll();
             int actualId = actual.getId();
-
             if (actualId == destinoId) {
+
                 List<Integer> caminoInteger = reconstruirCaminoDjikstra(predecesores, origenId, destinoId);
                 return crearCamino(caminoInteger);
             }
 
+            if (matrizAdyacencia.get(actualId) == null) {
+                continue;
+            }
+
             for (Arista arista : matrizAdyacencia.get(actualId)) {
-                // Verificar si la arista está cerrada antes de procesarla
                 if (arista != null && !arista.getIsClosed()) {
                     int vecinoId = arista.getDestino().getId();
                     int nuevaDistancia = distancias[actualId] + arista.getPeso();
+
 
                     if (nuevaDistancia < distancias[vecinoId]) {
                         distancias[vecinoId] = nuevaDistancia;
                         predecesores[vecinoId] = actualId;
                         pq.add(vertices.get(vecinoId));
                     }
+                } else if (arista != null && arista.getIsClosed()) {
+                    System.out.println("Saltando arista cerrada: origen=" + arista.getOrigen().getId() + ", destino=" + arista.getDestino().getId());
                 }
             }
         }
 
         return null;
     }
+
 
 
 
@@ -192,19 +200,45 @@ public class Grafo {
         return camino;
     }
 
-    public  List<Arista> crearCamino(List<Integer> camino) {
-        List<Arista> aristas =  new ArrayList<>();
+    public List<Arista> crearCamino(List<Integer> camino) {
+        if (camino == null || camino.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Arista> aristas = new ArrayList<>();
+
         for (int i = 0; i < camino.size(); i++) {
-            if (i < camino.size()-1) {
+            if (i < camino.size() - 1) {
+                int origenId = camino.get(i);
+                int destinoId = camino.get(i + 1);
+
+                boolean aristaEncontrada = false;
                 for (Arista arista : this.aristas) {
-                    if (camino.get(i) == arista.getOrigen().getId() && camino.get(i + 1) == arista.getDestino().getId()) {
-                        aristas.add(arista);
+                    if (arista == null) {
+                        continue;
                     }
+
+                    if (origenId == arista.getOrigen().getId() && destinoId == arista.getDestino().getId()) {
+                        aristas.add(arista);
+                        aristaEncontrada = true;
+                        break;
+                    }
+                }
+
+                if (!aristaEncontrada) {
                 }
             }
         }
+
+        if (aristas.isEmpty()) {
+            System.out.println("crearCamino: No se encontraron aristas para el camino proporcionado.");
+        } else {
+            System.out.println("crearCamino: Aristas resultantes del camino: " + aristas);
+        }
+
         return aristas;
     }
+
     public List<Vertice> getVertices() {
         return vertices;
     }

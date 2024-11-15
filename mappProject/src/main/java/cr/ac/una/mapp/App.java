@@ -10,8 +10,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
       FlowController.getInstance().InitializeFlow(stage, null);
-      FlowController.getInstance().goViewInWindow("MainMapView");
-    //  FlowController.getInstance().goViewInWindow("GraphEditorView");
+     FlowController.getInstance().goViewInWindow("MainMapView");
+     // FlowController.getInstance().goViewInWindow("GraphEditorView");
  
     }
 

@@ -39,6 +39,12 @@ public class GraphEditorController extends Controller implements Initializable {
     private AnchorPane root;
     @FXML
     private ImageView mapaImg;
+    @FXML
+    private Button minimizeButton;
+    @FXML
+    private Button maximizeButton;
+    @FXML
+    private Button closeButton;
     private List<Circle> circulos = new ArrayList<>();
     private Integer click = 0;
     private Circle origen;
@@ -56,13 +62,37 @@ public class GraphEditorController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapaImg.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            colocarCirculo(event.getX(), event.getY());
+            colocarCirculo(event.getX(), event.getSceneY());
         });
+        inicializarOnActions();
     }
 
     @Override
     public void initialize() {
 
+    }
+
+    private void inicializarOnActions() {
+        minimizeButton.setOnAction(event -> {
+            Stage stage = (Stage) minimizeButton.getScene().getWindow();
+            stage.setIconified(true);
+        });
+
+        // Acción para el botón de maximizar/restaurar
+        maximizeButton.setOnAction(event -> {
+            Stage stage = (Stage) maximizeButton.getScene().getWindow();
+            if (stage.isMaximized()) {
+                stage.setMaximized(false);
+            } else {
+                stage.setMaximized(true);
+            }
+        });
+
+        // Acción para el botón de cerrar
+        closeButton.setOnAction(event -> {
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+        });
     }
 
     private void colocarCirculo(double x, double y) {
@@ -275,8 +305,9 @@ public class GraphEditorController extends Controller implements Initializable {
                 if (longitud <= 0) {
                     throw new NumberFormatException("La longitud debe ser mayor que cero.");
                 }
-//Cambiar a setLongitud
-                arista.setPeso(longitud);
+                //Cambiar a setLongitud
+                arista.setLongitud(longitud);
+                arista.setPeso(longitud/2);
                 grafo.agregarArista(arista);
                
                 ventana.close();
@@ -358,10 +389,10 @@ public class GraphEditorController extends Controller implements Initializable {
             //configurar la linea puede ser
              if (event.getButton() == MouseButton.PRIMARY) {
                  Arista linea = (Arista)line.getUserData();
-                 System.out.println("linea origen : " + linea.getOrigen().getId() + " Destino : " + linea.getDestino().getId() );
+                 System.out.println("linea origen : " + linea.getLongitud() + " Destino : " + linea.getLongitud() );
             } else if (event.getButton() == MouseButton.SECONDARY) {
               Arista linea = (Arista)line.getUserData();
-                 System.out.println("linea origen : " + linea.getOrigen().getId() + " Destino : " + linea.getDestino().getId() );
+                 System.out.println("linea origen : " + linea.getLongitud() + " Destino : " + linea.getLongitud());
             }
         });
         arrow2.setOnMouseClicked(event -> {
@@ -371,7 +402,7 @@ public class GraphEditorController extends Controller implements Initializable {
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
                          Arista linea = (Arista)line.getUserData();
-                 System.out.println("linea origen : " + linea.getOrigen().getId() + " Destino : " + linea.getDestino().getId() );
+                 System.out.println("linea origen : " +linea.getLongitud() + " Destino : " + linea.getLongitud() );
    
             }
         });

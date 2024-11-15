@@ -1,26 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.GraphEditorController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.GraphEditorController">
    <children>
-      <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="325.02191162109375" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../resources/map.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="CENTER" layoutX="648.0" layoutY="4.0" prefHeight="648.0" prefWidth="292.0">
+
+      <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="992.0" style="-fx-background-color: #333333; -fx-padding: 5px; -fx-spacing: 10px;">
+         <Label fx:id="titleLabel" style="-fx-text-fill: #ffffff; -fx-font-size: 14px;" text="UNA MAPS" />
+         <Pane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+         <Button fx:id="minimizeButton" styleClass="window-button" text="—" />
+         <Button fx:id="maximizeButton" disable="true" styleClass="window-button" text="⬜" />
+         <Button fx:id="closeButton" styleClass="window-button" text="✕" />
+      </HBox>
+      
+      <HBox layoutY="35">
          <children>
-            <Button mnemonicParsing="false" onAction="#mostrarMatriz" text="Mostrar Matriz" />
-            <Button mnemonicParsing="false" onAction="#guardarAction" prefHeight="25.0" prefWidth="158.0" text="guardar configuracion" />
-            <Button mnemonicParsing="false" onAction="#cargarAction" prefHeight="25.0" prefWidth="158.0" text="Cargar configuracion" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+      
+            <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../resources/map.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="647.0" prefWidth="337.0">
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarMatriz" text="Mostrar Matriz">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" top="25.0" />
+                     </VBox.margin></Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#guardarAction" prefHeight="25.0" prefWidth="158.0" text="Guardar configuracion">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" top="25.0" />
+                     </VBox.margin></Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cargarAction" prefHeight="25.0" prefWidth="158.0" text="Cargar configuracion">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" top="25.0" />
+                     </VBox.margin></Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" top="25.0" />
+                     </VBox.margin></Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" top="25.0" />
+                     </VBox.margin></Button>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

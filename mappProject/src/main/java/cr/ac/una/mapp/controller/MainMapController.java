@@ -232,7 +232,7 @@ public class MainMapController extends Controller implements Initializable {
         List<Arista> aristasOrigen = grafo.matrizAdyacencia.get(origenId);
 
         for (Arista arista : aristasOrigen) {
-            if (arista != null && arista.getOrigen().equals(origen)) {
+            if (arista != null && arista.getOrigen().getId().equals(origen.getId())) {
                 Line line = encontrarLineaPorArista(arista);
 
                 if (line != null) {
@@ -311,7 +311,7 @@ public class MainMapController extends Controller implements Initializable {
 
     private Line encontrarLineaPorArista(Arista arista) {
         for (Line line : lineas) {
-            System.out.println(line.getUserData());
+            //System.out.println(line.getUserData());
             if (arista.equals(line.getUserData())) {  // Usando equals para comparar por contenido
                 return line;
             }
@@ -497,6 +497,10 @@ public class MainMapController extends Controller implements Initializable {
         grafo.isUsingDijkstra = true;
         List<Arista> caminoAristas = grafo.dijkstra(origenDjikstra, destinoDjikstra);
         System.out.println("Dijkstra");
+        if (caminoAristas == null || caminoAristas.isEmpty()) {
+            System.out.println("No se encontró un camino entre " + origenDjikstra + " y " + destinoDjikstra);
+            return; // Evitar ejecutar el siguiente código si el camino no existe
+        }
 
         if (caminoAristas == null) {
             System.out.println("No existe camino debido a calles cerradas.");

@@ -76,12 +76,12 @@ public class Vertice {
             return false;
         }
         Vertice vertice = (Vertice) obj;
-        return id == vertice.id; // O compara el atributo único que identifica a cada vértice
+        return id == vertice.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id); // O el atributo único correspondiente
+        return Objects.hash(id);
     }
 
 }

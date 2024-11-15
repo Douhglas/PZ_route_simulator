@@ -56,7 +56,7 @@ public class Carro {
         caminoOriginal.clear();
         caminoRecorrido.clear();
         caminoOriginal = camino;
-        crearSimulacion(camino.get(0), 10);
+        crearSimulacion(camino.get(0), 3);
     }
 
     public void crearSimulacion(Arista arista, int tiempoAnimacion) {

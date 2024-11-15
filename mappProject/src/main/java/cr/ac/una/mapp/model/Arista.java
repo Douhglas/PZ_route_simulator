@@ -126,10 +126,20 @@ public class Arista {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
+
         Arista arista = (Arista) obj;
-        return origen.equals(arista.origen) &&
-                destino.equals(arista.destino);
+
+        boolean idsCoinciden = Objects.equals(this.origen.getId(), arista.origen.getId()) &&
+                Objects.equals(this.destino.getId(), arista.destino.getId());
+
+        if (idsCoinciden) {
+            System.out.println("Arista coincidente: origen=" + this.origen.getId() + ", destino=" + this.destino.getId());
+        }
+
+        return idsCoinciden;
     }
+
+
 
     @Override
     public int hashCode() {
