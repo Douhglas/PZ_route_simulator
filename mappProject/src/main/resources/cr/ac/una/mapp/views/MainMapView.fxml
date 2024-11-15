@@ -9,43 +9,56 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.MainMapController">
-   <children>
-      <HBox>
-         <children>
-            <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../resources/map.png" />
-               </image>
-            </ImageView>
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="657.0" prefWidth="964.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.mapp.controller.MainMapController">
+    <children>
+        <!-- Barra de título personalizada -->
+        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="970.0" style="-fx-background-color: #333333; -fx-padding: 5px; -fx-spacing: 10px;">
+            <Label fx:id="titleLabel" style="-fx-text-fill: #ffffff; -fx-font-size: 14px;" text="UNA MAPS" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="minimizeButton" styleClass="window-button" text="—" />
+            <Button fx:id="maximizeButton" disable="true" styleClass="window-button" text="⬜" />
+            <Button fx:id="closeButton" styleClass="window-button" text="✕" />
+        </HBox>
+
+        <HBox layoutY="35">
+        <children>
+                <ImageView fx:id="mapaImg" fitHeight="650.0" fitWidth="650.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../resources/map.png" />
+                    </image>
+                </ImageView>
 
 
-            <VBox alignment="CENTER" prefWidth="300.0" spacing="15.0">
-               <children>
+                <VBox alignment="CENTER" prefWidth="300.0" spacing="15.0">
+                    <children>
 
-                  <Label prefHeight="26.0" prefWidth="278.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Opciones de Algoritmo y Modificación de Ruta" />
+                        <Label prefHeight="26.0" prefWidth="278.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Opciones de Algoritmo y Modificación de Ruta" />
 
-                  <Button fx:id="btnDijkstra" onAction="#onActionCalcularDjikstra" prefWidth="200" text="Aplicar Dijkstra" />
-                  <Button fx:id="btnFloydWarshall" onAction="#onActionCalcularFloyd" prefWidth="200" text="Aplicar Floyd-Warshall" />
+                        <Button fx:id="btnDijkstra" onAction="#onActionCalcularDjikstra" prefWidth="200" text="Aplicar Dijkstra" />
+                        <Button fx:id="btnFloydWarshall" onAction="#onActionCalcularFloyd" prefWidth="200" text="Aplicar Floyd-Warshall" />
 
-                  <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Modificar Estado de Arista Seleccionada" />
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Modificar Estado de Arista Seleccionada" />
 
-                  <Label text="Nivel de Tráfico:" />
-                  <Spinner fx:id="spinnerTrafico" editable="true" initialValue="1" max="3" min="1" prefWidth="200" />
+                        <Label text="Nivel de Tráfico:" />
+                        <Spinner fx:id="spinnerTrafico" editable="true" initialValue="1" max="3" min="1" prefWidth="200" />
 
-                  <CheckBox fx:id="checkBoxCerrado" text="Marcar como Calle Cerrada" />
+                        <CheckBox fx:id="checkBoxCerrado" text="Marcar como Calle Cerrada" />
 
-                  <Button fx:id="btnGuardarCambios" onAction="#onActionGuardarCambios" prefWidth="200" text="Guardar Cambios en Arista" />
+                        <CheckBox fx:id="cbAccidente" text="Marcar como Accidentada" />
 
-                  <Separator prefWidth="200" />
 
-                  <Button fx:id="btnInfo" onAction="#onActionAbrirInfo" prefWidth="200" text="Mostrar Matriz de Adyacencia" />
+                        <Button fx:id="btnGuardarCambios" onAction="#onActionGuardarCambios" prefWidth="200" text="Guardar Cambios en Arista" />
 
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </children>
+                        <Separator prefWidth="200" />
+
+                        <Button fx:id="btnInfo" onAction="#onActionAbrirInfo" prefWidth="200" text="Mostrar Matriz de Adyacencia" />
+
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
 </AnchorPane>

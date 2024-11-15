@@ -2,6 +2,8 @@ package cr.ac.una.mapp.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.Objects;
+
 /**
  *
  * @author stward segura
@@ -31,7 +33,18 @@ public class Arista {
         this.longitud = 0;
         this.nivelTrafico = 1;
         
-    } 
+    }
+
+    public Arista(Vertice origen, Vertice destino) {
+        this.origen = origen;
+        this.destino = destino;
+        this.peso = 0;
+        this.time = 0;
+        this.isClosed = false;
+        this.longitud = 0;
+        this.nivelTrafico = 1;
+    }
+
     public Vertice getOrigen() {
         return origen;
     }
@@ -107,6 +120,20 @@ public class Arista {
                 ", longitud=" + longitud +
                 ", nivelTrafico=" + nivelTrafico +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Arista arista = (Arista) obj;
+        return origen.equals(arista.origen) &&
+                destino.equals(arista.destino);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(origen, destino, peso);
     }
 
 }

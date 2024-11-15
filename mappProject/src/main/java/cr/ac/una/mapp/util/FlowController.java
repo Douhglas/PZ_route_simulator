@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
  
 import java.util.logging.Level;
@@ -144,7 +145,7 @@ public class FlowController {
         FXMLLoader loader = getLoader(viewName);
         Controller controller = loader.getController();
         controller.initialize();
-        Stage stage = new Stage();
+        Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.setTitle(controller.getNombreVista());
 
        // stage.getIcons().add(new Image("cr/ac/una/Preguntados/resources/icon.png"));
