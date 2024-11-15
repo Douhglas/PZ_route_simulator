@@ -67,21 +67,27 @@ public class Carro {
         crearSimulacion(camino.get(0), 3);
     }
 
-    public void crearSimulacion(Arista arista, int tiempoAnimacion) {
+    public void crearSimulacion(Arista arista, int tiempoBaseAnimacion) {
+        // Obtener nivel de tráfico directamente de la arista
+        int nivelDeTrafico = arista.getNivelTrafico();
+        int tiempoAnimacion = tiempoBaseAnimacion * nivelDeTrafico;
 
+        System.out.println("Tiempo de animación ajustado por tráfico: " + tiempoAnimacion + " segundos (Nivel de tráfico: " + nivelDeTrafico + ")");
+
+        // Calcular costos
         double costoPeso = arista.getPeso() * COSTO_POR_PESO;
         costoTotalPeso += costoPeso;
-
-        System.out.println("Costo actual por peso: " + costoPeso + ". Costo total acumulado por peso: " + costoTotalPeso);
 
         double costoTiempo = tiempoAnimacion * COSTO_POR_SEGUNDO;
         costoTotalTiempo += costoTiempo;
 
+        System.out.println("Costo actual por peso: " + costoPeso + ". Costo total acumulado por peso: " + costoTotalPeso);
         System.out.println("Costo actual por tiempo: " + costoTiempo + ". Costo total acumulado por tiempo: " + costoTotalTiempo);
 
         caminoRecorrido.add(arista);
         anchorPane.getChildren().remove(carroImageView);
 
+        // Crear línea de ruta
         Line ruta = new Line();
         ruta.setStartX(arista.getOrigen().getX());
         ruta.setStartY(arista.getOrigen().getY());
@@ -91,6 +97,7 @@ public class Carro {
 
         rotarCarro(arista);
 
+        // Dibujar rastro
         Line rastro = new Line();
         rastro.setStroke(Color.TRANSPARENT);
         rastro.setStrokeWidth(2);
@@ -127,7 +134,7 @@ public class Carro {
             System.out.println("Evento de transición finalizado. Verificando estado...");
             System.out.println("Origen actual: " + origen + ", Destino final: " + destino);
 
-            if (origen == destino) {
+            if (origen.equals(destino)) {
                 System.out.println("El vehículo ha llegado al destino. Mostrando costo final...");
                 mostrarCostoFinal();
                 return;
@@ -145,38 +152,36 @@ public class Carro {
             }
 
             if (camino == null || camino.isEmpty() || camino.stream().allMatch(Arista::getIsClosed)) {
-                if (Objects.equals(origen, destino)) {
+                if (origen.equals(destino)) {
                     System.out.println("El vehículo ya está en el destino. Mostrando costo final...");
                     mostrarCostoFinal();
                     return;
                 }
 
                 System.out.println("No se encontró un camino válido. Deteniendo para esperar...");
-                esperarYReintentar(15, tiempoAnimacion); 
+                esperarYReintentar(15, tiempoBaseAnimacion);
                 return;
             }
 
             Arista siguienteArista = camino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
 
             if (siguienteArista == null) {
-                if (origen == destino) {
+                if (origen.equals(destino)) {
                     System.out.println("El vehículo ya está en el destino. Mostrando costo final...");
                     mostrarCostoFinal();
                     return;
                 }
 
                 System.out.println("No se encontró una arista abierta desde el nodo actual. Deteniendo para esperar...");
-                esperarYReintentar(15, tiempoAnimacion);
+                esperarYReintentar(15, tiempoBaseAnimacion);
                 return;
             }
 
             System.out.println("Ruta encontrada: De " + siguienteArista.getOrigen().getId() + " a " + siguienteArista.getDestino().getId());
-            crearSimulacion(siguienteArista, tiempoAnimacion);
+            crearSimulacion(siguienteArista, tiempoBaseAnimacion);
         });
-
-
-
     }
+
 
     private void mostrarAlertaNoHayCamino() {
         Platform.runLater(() -> {

@@ -492,6 +492,8 @@ public class MainMapController extends Controller implements Initializable {
 
 
 
+
+
     @FXML
     void onActionCalcularDjikstra(ActionEvent event) {
         grafo.isUsingDijkstra = true;
