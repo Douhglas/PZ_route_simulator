@@ -48,7 +48,7 @@ public class GraphEditorController extends Controller implements Initializable {
     private List<Arista> aristas = new ArrayList<>();
     private int index = 0;
     Grafo grafo =  new Grafo();
-
+   boolean isLoadingData = false;
 
     /**
      * Initializes the controller class.
@@ -66,7 +66,7 @@ public class GraphEditorController extends Controller implements Initializable {
     }
 
     private void colocarCirculo(double x, double y) {
-        index++;
+        
         Circle circle = new Circle(x, y, 3);
         circle.setFill(Color.RED);
         circle.setStroke(Color.BLACK);
@@ -78,8 +78,9 @@ public class GraphEditorController extends Controller implements Initializable {
         circle.setUserData(vertice);
         circulos.add(circle);
         System.out.println("se creo un circulo");
+        if(!isLoadingData){
         grafo.agregarVertice(vertice);
-
+        }
         root.getChildren().add(circle);
 
         circle.setOnMouseClicked(e -> {
@@ -102,6 +103,7 @@ public class GraphEditorController extends Controller implements Initializable {
         circle.setOnMouseExited(e -> {
             circle.setRadius(3);
         });
+        index++;
     }
 
     private void drawLine(Arista arista) {
@@ -178,7 +180,7 @@ public class GraphEditorController extends Controller implements Initializable {
         if (click == 0) {
             click++;
             origen = circle;
-            System.out.println("origen");
+            System.out.println("origen" + origen.getId());
         } else if (click == 1) {
 
             destino = circle;
@@ -186,7 +188,7 @@ public class GraphEditorController extends Controller implements Initializable {
                 click++;
             }
 
-            System.out.println("destino");
+            System.out.println("destino"  + destino.getId());
 
         }
 
@@ -273,7 +275,7 @@ public class GraphEditorController extends Controller implements Initializable {
                 if (longitud <= 0) {
                     throw new NumberFormatException("La longitud debe ser mayor que cero.");
                 }
-
+//Cambiar a setLongitud
                 arista.setPeso(longitud);
                 grafo.agregarArista(arista);
                
@@ -306,8 +308,19 @@ public class GraphEditorController extends Controller implements Initializable {
 
     @FXML
     private void cargarAction(ActionEvent event) {
-
-        //  root.getChildren().removeIf(nodo -> nodo instanceof Line || nodo instanceof Circle); 
+        vertices.clear();
+        circulos.clear();
+        lineas.clear();
+        aristas.clear();
+        grafo = AppManager.getInstance().cargar();
+        isLoadingData = true;
+        for (Vertice vertice : grafo.getVertices()) {
+            colocarCirculo(vertice.getX(), vertice.getY());
+        }
+        for (Arista arista : grafo.getAristas()) {
+            drawLine(arista);
+        }
+        isLoadingData = false;
     }
 
     private void drawArrow(Line line) {
@@ -344,15 +357,11 @@ public class GraphEditorController extends Controller implements Initializable {
             //ventana para agregar accidentes,inhabilitar la arista, cantidad de transito, y mas
             //configurar la linea puede ser
              if (event.getButton() == MouseButton.PRIMARY) {
-
+                 Arista linea = (Arista)line.getUserData();
+                 System.out.println("linea origen : " + linea.getOrigen().getId() + " Destino : " + linea.getDestino().getId() );
             } else if (event.getButton() == MouseButton.SECONDARY) {
-                //change color and other things maybe
-                root.getChildren().remove(line);
-                root.getChildren().remove(arrow1);
-                root.getChildren().remove(arrow2);
-                // Remover el círculo de la lista
-                aristas.remove(line.getUserData());
-                lineas.remove(line);
+              Arista linea = (Arista)line.getUserData();
+                 System.out.println("linea origen : " + linea.getOrigen().getId() + " Destino : " + linea.getDestino().getId() );
             }
         });
         arrow2.setOnMouseClicked(event -> {
@@ -361,13 +370,9 @@ public class GraphEditorController extends Controller implements Initializable {
              if (event.getButton() == MouseButton.PRIMARY) {
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
-                //change color and other things maybe
-                root.getChildren().remove(line);
-                root.getChildren().remove(arrow1);
-                root.getChildren().remove(arrow2);
-                // Remover el círculo de la lista
-                aristas.remove(line.getUserData());
-                lineas.remove(line);
+                         Arista linea = (Arista)line.getUserData();
+                 System.out.println("linea origen : " + linea.getOrigen().getId() + " Destino : " + linea.getDestino().getId() );
+   
             }
         });
         arrow1.setOnMouseEntered(e -> {

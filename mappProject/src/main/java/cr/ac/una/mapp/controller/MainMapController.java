@@ -419,18 +419,19 @@ public class MainMapController extends Controller implements Initializable {
 
     @FXML
     void onActionAbrirInfo(ActionEvent event) {
-        System.out.println("Cambiando...");
-
-        for (Arista arista : grafo.getAristas()) {
-            System.out.println("Aristas antes: " + arista.getPeso());
-        }
-        grafo.mostrarMatrizAdyacenciaActual();
-        grafo.matrizAdyacencia.get(1).get(2).setPeso(2000);
-        for (Arista arista : grafo.getAristas()) {
-            System.out.println("Aristas después: " + arista.getPeso());
-        }
-        grafo.mostrarMatrizAdyacenciaActual();
-        AppContext.getInstance().set("grafo", grafo);
+//        System.out.println("Cambiando...");
+//
+//        for (Arista arista : grafo.getAristas()) {
+//            System.out.println("Aristas antes: " + arista.getPeso());
+//        }
+//        grafo.mostrarMatrizAdyacenciaActual();
+//        grafo.matrizAdyacencia.get(1).get(2).setPeso(2000);
+//        for (Arista arista : grafo.getAristas()) {
+//            System.out.println("Aristas después: " + arista.getPeso());
+//        }
+//        grafo.mostrarMatrizAdyacenciaActual();
+//        AppContext.getInstance().set("grafo", grafo);
+grafo.mostrarMatrizAdyacenciaActual();
     }
 
     @FXML

@@ -152,7 +152,7 @@ public class Grafo {
                     if (dist[i][k] != Integer.MAX_VALUE && dist[k][j] != Integer.MAX_VALUE
                             && dist[i][j] > dist[i][k] + dist[k][j]) {
                         dist[i][j] = dist[i][k] + dist[k][j];
-                        predecesor[i][j] = k;
+                        predecesor[i][j] = predecesor[k][j];  
                     }
                 }
             }
