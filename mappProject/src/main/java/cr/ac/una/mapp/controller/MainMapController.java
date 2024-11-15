@@ -52,6 +52,11 @@ public class MainMapController extends Controller implements Initializable {
     @FXML
     private CheckBox checkBoxCerrado;
 
+    @FXML
+    private CheckBox cbAccidente;
+
+    @FXML
+    private ComboBox<String> cbCarril;
      private double xOffset = 0;
     private double yOffset = 0;
 
@@ -149,56 +154,134 @@ public class MainMapController extends Controller implements Initializable {
 
 
     private void colocarCirculo(Vertice vertice) {
-
         Circle circle = new Circle(vertice.getX(), vertice.getY(), 3);
         circle.setFill(Color.ALICEBLUE);
         circle.setStroke(Color.AQUA);
-
         circle.setUserData(vertice);
         circulos.add(circle);
-        System.out.println("se creo un circulo ");
-
         root.getChildren().add(circle);
 
         circle.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 if (click == 0) {
-                    
                     origen = (Vertice) circle.getUserData();
                     origenDjikstra = origen.getId();
-                    origenFloyd = origen.getId();
                     click++;
-                    System.out.println("click en nodo : " + origen.getId());
-
+                    System.out.println("Nodo origen seleccionado: " + origen.getId());
+                    resaltarAristasAdyacentes(origen);
                 } else if (click == 1 && origen != (Vertice) circle.getUserData()) {
                     destino = (Vertice) circle.getUserData();
                     destinoDjikstra = destino.getId();
-                    destinoFloyd = destino.getId();
                     click = 0;
-//                    List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
-//                    if (camino == null) {
-//                        System.out.println("No existe camino");
-//                    } else {
-//                        drawPath(camino);
-////                        carro.setOrigen(origen.getId());
-////                        carro.setDestino(destino.getId());
-////                        carro.crearSimulacion(camino.get(0), 3);
-//                    }
+                    System.out.println("Nodo destino seleccionado: " + destino.getId());
 
+                    Arista aristaSeleccionada = seleccionarAristaEntreOrigenYDestino(origen, destino);
+
+                    if (aristaSeleccionada != null) {
+                        ocultarAristasAdyacentes(origen, aristaSeleccionada);
+                    }
                 }
-
-            } else if (e.getButton() == MouseButton.SECONDARY) {
-                //change color and other things maybe
-                mostrarRutasDeVertice((Vertice) circle.getUserData());
             }
         });
-        circle.setOnMouseEntered(e -> {
-            circle.setRadius(7);
-        });
 
-        circle.setOnMouseExited(e -> {
-            circle.setRadius(3);
-        });
+        circle.setOnMouseEntered(e -> circle.setRadius(7));
+        circle.setOnMouseExited(e -> circle.setRadius(3));
+    }
+
+    /**
+     * Resalta las aristas adyacentes desde el nodo origen, mostrando las conexiones.
+     */
+    private void resaltarAristasAdyacentes(Vertice origen) {
+        int origenId = origen.getId();
+
+        List<Arista> aristasOrigen = grafo.matrizAdyacencia.get(origenId);
+
+        for (Arista arista : aristasOrigen) {
+            if (arista != null && arista.getOrigen().equals(origen)) {
+                Line line = encontrarLineaPorArista(arista);
+
+                if (line != null) {
+                    line.setStroke(Color.YELLOW);
+                    line.setStrokeWidth(3);
+                    line.setVisible(true);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Oculta las aristas adyacentes después de seleccionar el nodo destino.
+     */
+    private void ocultarAristasAdyacentes(Vertice origen, Arista aristaSeleccionada) {
+        int origenId = origen.getId();
+        List<Arista> aristasOrigen = grafo.matrizAdyacencia.get(origenId);
+
+        for (Arista arista : aristasOrigen) {
+            if (arista != null && arista.getOrigen().equals(origen) && !arista.equals(aristaSeleccionada)) {
+                Line line = encontrarLineaPorArista(arista);
+
+                if (line != null) {
+                    line.setStroke(Color.TRANSPARENT);  // Oculta la línea de conexión
+                    line.setVisible(false);             // Hacer la línea invisible temporalmente
+                }
+            }
+        }
+    }
+
+    /**
+     * Selecciona y resalta la arista entre el nodo origen y destino especificados.
+     */
+    private Arista seleccionarAristaEntreOrigenYDestino(Vertice origen, Vertice destino) {
+        int origenId = origen.getId();
+        int destinoId = destino.getId();
+
+        // Obtener la arista desde la matriz de adyacencia
+        Arista arista = grafo.matrizAdyacencia.get(origenId).get(destinoId);
+
+        if (arista != null) {
+            // Si la arista es válida, buscar y resaltar su línea correspondiente
+            Line line = encontrarLineaPorArista(arista);
+            if (line != null) {
+                line.setStroke(Color.YELLOW);
+                line.setStrokeWidth(4);
+                line.setVisible(true);
+                System.out.println("Arista seleccionada entre " + origenId + " y " + destinoId);
+
+                // Asignar la línea seleccionada
+                lineaSeleccionada = line;
+
+                // Ocultar todas las otras aristas
+                for (Line otherLine : lineas) {
+                    if (otherLine != line) {
+                        otherLine.setStroke(Color.TRANSPARENT);
+                        otherLine.setVisible(false);
+                    }
+                }
+            }
+        } else {
+            System.out.println("No se encontró una arista entre " + origenId + " y " + destinoId);
+            lineaSeleccionada = null;
+
+            // Si no hay una arista válida, ocultar todas las aristas
+            for (Line line : lineas) {
+                line.setStroke(Color.TRANSPARENT);
+                line.setVisible(false);
+            }
+        }
+
+        return arista; // Retornar la arista seleccionada o null si no se encontró
+    }
+
+
+    private Line encontrarLineaPorArista(Arista arista) {
+        for (Line line : lineas) {
+            System.out.println(line.getUserData());
+            if (arista.equals(line.getUserData())) {  // Usando equals para comparar por contenido
+                return line;
+            }
+        }
+        return null; // No se encontró ninguna línea correspondiente
     }
 
     private void drawLine(Arista arista, Paint color) {
@@ -285,9 +368,8 @@ public class MainMapController extends Controller implements Initializable {
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(15));
 
-        // Crear lista de rutas en un ListView
         ListView<Arista> listaRutas = new ListView<>();
-        listaRutas.getItems().addAll(verticeSeleccionado.getAristas()); // Obtener rutas del vértice
+        listaRutas.getItems().addAll(verticeSeleccionado.getAristas());
         listaRutas.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Arista arista, boolean empty) {
@@ -359,10 +441,11 @@ public class MainMapController extends Controller implements Initializable {
             line.setEndY(arista.getDestino().getY());
             line.setStroke(Color.BLUE);
 
-            root.getChildren().add(line);
+            root.getChildren().add(1, line);
             lineasRuta.add(line);
         }
     }
+
 
 
     public void clearPath() {
@@ -399,7 +482,7 @@ public class MainMapController extends Controller implements Initializable {
 
         if (camino == null) {
             System.out.println("No existe camino debido a calles cerradas.");
-            mostrarAlertaNoHayCamino();
+           // mostrarAlertaNoHayCamino();
         } else {
             drawPath(camino);
             carro.setOrigen(origen.getId());
@@ -449,10 +532,11 @@ public class MainMapController extends Controller implements Initializable {
 
         int nuevoNivelTrafico = (int) spinnerTrafico.getValue();
         boolean isClosed = checkBoxCerrado.isSelected();
+        boolean isAccidente = cbAccidente.isSelected();
 
         aristaSeleccionada.setLongitud(1000);
         aristaSeleccionada.setNivelTrafico(nuevoNivelTrafico);
-        aristaSeleccionada.setIsClosed(isClosed);
+        aristaSeleccionada.setIsClosed(isClosed || isAccidente);
         aristaSeleccionada.setPeso(aristaSeleccionada.getLongitud() * nuevoNivelTrafico);
 
         int idOrigen = aristaSeleccionada.getOrigen().getId();

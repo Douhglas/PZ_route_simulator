@@ -13,6 +13,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.animation.Transition;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -84,7 +86,6 @@ public class Carro {
 
             @Override
             protected void interpolate(double frac) {
-               
                 double x = ruta.getStartX() + frac * (ruta.getEndX() - ruta.getStartX());
                 double y = ruta.getStartY() + frac * (ruta.getEndY() - ruta.getStartY());
                 rastro.setEndX(x);
@@ -93,7 +94,6 @@ public class Carro {
             }
         };
         rastroAnimation.play();
-        
 
         pathTransition = new PathTransition();
         pathTransition.setNode(carroImageView);
@@ -110,15 +110,95 @@ public class Carro {
             if (origen != destino) {
                 List<Arista> camino;
                 origen = siguienteNodo;
+
                 if (grafo.isUsingDijkstra) {
                     camino = grafo.dijkstra(origen, destino);
                 } else {
                     camino = grafo.floydWarshall(origen, destino);
                 }
-                if (camino == null) {
+
+                // Validar si el camino contiene solo aristas cerradas
+                if (camino == null || camino.isEmpty() || camino.stream().allMatch(Arista::getIsClosed)) {
+                    mostrarAlertaNoHayCamino();
+                    regresarANodoAnterior(tiempoAnimacion);
                     return;
                 }
-                crearSimulacion(camino.get(0), tiempoAnimacion);
+
+                // Obtener la siguiente arista disponible que no esté cerrada
+                Arista siguienteArista = camino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
+
+                if (siguienteArista == null) {
+                    mostrarAlertaNoHayCamino();
+                    regresarANodoAnterior(tiempoAnimacion);
+                    return;
+                }
+
+                crearSimulacion(siguienteArista, tiempoAnimacion);
+            }
+        });
+    }
+
+    private void mostrarAlertaNoHayCamino() {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ruta no disponible");
+            alert.setHeaderText(null);
+            alert.setContentText("No hay un camino disponible debido a calles cerradas. Intentando regresar...");
+            alert.showAndWait();
+        });
+    }
+
+
+    private void regresarANodoAnterior(int tiempoAnimacion) {
+        if (caminoRecorrido.size() < 2) {
+            mostrarAlertaNoHayCamino();
+            return;
+        }
+
+        Arista ultimaArista = caminoRecorrido.get(caminoRecorrido.size() - 1);
+        Arista aristaAnterior = caminoRecorrido.get(caminoRecorrido.size() - 1);
+
+        Line rutaDeRegreso = new Line();
+        rutaDeRegreso.setStartX(ultimaArista.getDestino().getX());
+        rutaDeRegreso.setStartY(ultimaArista.getDestino().getY());
+        rutaDeRegreso.setEndX(aristaAnterior.getOrigen().getX());
+        rutaDeRegreso.setEndY(aristaAnterior.getOrigen().getY());
+
+        rotarCarro(aristaAnterior);
+
+        if (!anchorPane.getChildren().contains(carroImageView)) {
+            anchorPane.getChildren().add(carroImageView);
+        }
+
+        pathTransition = new PathTransition();
+        pathTransition.setNode(carroImageView);
+        pathTransition.setPath(rutaDeRegreso);
+        pathTransition.setDuration(Duration.seconds(tiempoAnimacion));
+        pathTransition.setCycleCount(1);
+        pathTransition.play();
+
+        pathTransition.setOnFinished(event -> {
+            origen = aristaAnterior.getOrigen().getId();
+            caminoRecorrido.remove(ultimaArista);
+
+            List<Arista> nuevoCamino;
+            if (grafo.isUsingDijkstra) {
+                nuevoCamino = grafo.dijkstra(origen, destino);
+            } else {
+                nuevoCamino = grafo.floydWarshall(origen, destino);
+            }
+
+            if (nuevoCamino == null || nuevoCamino.isEmpty() || nuevoCamino.stream().allMatch(Arista::getIsClosed)) {
+                mostrarAlertaNoHayCamino();
+                regresarANodoAnterior(tiempoAnimacion);
+            } else {
+                Arista siguienteArista = nuevoCamino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
+                if (siguienteArista != null) {
+                    crearSimulacion(siguienteArista, tiempoAnimacion);
+                } else {
+                    mostrarAlertaNoHayCamino();
+                    regresarANodoAnterior(tiempoAnimacion);
+                }
             }
         });
     }
