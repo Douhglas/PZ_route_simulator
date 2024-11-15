@@ -17,12 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -377,15 +372,16 @@ public class MainMapController extends Controller implements Initializable {
         grafo.isUsingDijkstra = true;
         List<Arista> caminoAristas = grafo.dijkstra(origenDjikstra, destinoDjikstra);
         System.out.println("Dijkstra");
+
         if (caminoAristas == null) {
-            System.out.println("No existe camino ");
+            System.out.println("No existe camino debido a calles cerradas.");
+            mostrarAlertaNoHayCamino();
         } else {
             drawPath(caminoAristas);
             carro.setOrigen(origen.getId());
             carro.setDestino(destino.getId());
             carro.IniciarRecorrido(caminoAristas);
         }
-
     }
 
     @FXML
@@ -393,30 +389,26 @@ public class MainMapController extends Controller implements Initializable {
         grafo.isUsingDijkstra = false;
         List<Arista> camino = grafo.floydWarshall(origen.getId(), destino.getId());
         System.out.println("Floyd");
+
         if (camino == null) {
-            System.out.println("No existe camino");
+            System.out.println("No existe camino debido a calles cerradas.");
+            mostrarAlertaNoHayCamino();
         } else {
             drawPath(camino);
             carro.setOrigen(origen.getId());
             carro.setDestino(destino.getId());
             carro.IniciarRecorrido(camino);
-
-            AppContext.getInstance().set("caminoInicial", camino);
         }
     }
 
-   /* private void verificarYActualizarRuta(Vertice actual, Vertice destino) {
-        if (condicionesCambiadas()) {
-            List<Integer> nuevaRuta = grafo.dijkstra(actual.getId(), destino.getId());
-            List<Arista> nuevaRutaAristas = grafo.crearCamino(nuevaRuta);
+    private void mostrarAlertaNoHayCamino() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Ruta no disponible");
+        alert.setHeaderText(null);
+        alert.setContentText("No hay una ruta disponible entre los puntos seleccionados debido a calles cerradas.");
+        alert.showAndWait();
+    }
 
-            clearPath();
-            drawPath(nuevaRutaAristas);
-
-            setRutaParaMovimiento(nuevaRutaAristas);
-
-        }
-    }*/
 
     @FXML
     void onActionAbrirInfo(ActionEvent event) {
