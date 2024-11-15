@@ -166,15 +166,12 @@ public class GraphEditorController extends Controller implements Initializable {
             if (event.getButton() == MouseButton.PRIMARY) {
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
-                //change color and other things maybe
                 root.getChildren().remove(line);
 
-                // Remover el círculo de la lista
                 aristas.remove(line.getUserData());
                 lineas.remove(line);
             }
-            //ventana para agregar accidentes,inhabilitar la arista, cantidad de transito, y mas
-            //configurar la linea puede ser
+
         });
         line.setOnMouseEntered(e -> {
             if (origenCircle != null) {
@@ -305,7 +302,6 @@ public class GraphEditorController extends Controller implements Initializable {
                 if (longitud <= 0) {
                     throw new NumberFormatException("La longitud debe ser mayor que cero.");
                 }
-                //Cambiar a setLongitud
                 arista.setLongitud(longitud);
                 arista.setPeso(longitud/2);
                 grafo.agregarArista(arista);

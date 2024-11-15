@@ -11898,7 +11898,23 @@
       null,
       null,
       null,
-      null,
+      {
+        "origen": {
+          "id": 59,
+          "x": 194.4,
+          "y": 533.6
+        },
+        "destino": {
+          "id": 65,
+          "x": 208.8,
+          "y": 501.6
+        },
+        "peso": 50,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 100,
+        "nivelTrafico": 1
+      },
       null,
       null,
       null,
@@ -12962,7 +12978,23 @@
       null,
       null,
       null,
-      null,
+      {
+        "origen": {
+          "id": 65,
+          "x": 208.8,
+          "y": 501.6
+        },
+        "destino": {
+          "id": 59,
+          "x": 194.4,
+          "y": 533.6
+        },
+        "peso": 50,
+        "isClosed": false,
+        "time": 0,
+        "longitud": 100,
+        "nivelTrafico": 1
+      },
       null,
       null,
       null,
@@ -33311,6 +33343,40 @@
         "id": 106,
         "x": 265.6,
         "y": 352.0
+      },
+      "peso": 50,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 100,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 65,
+        "x": 208.8,
+        "y": 501.6
+      },
+      "destino": {
+        "id": 59,
+        "x": 194.4,
+        "y": 533.6
+      },
+      "peso": 50,
+      "isClosed": false,
+      "time": 0,
+      "longitud": 100,
+      "nivelTrafico": 1
+    },
+    {
+      "origen": {
+        "id": 59,
+        "x": 194.4,
+        "y": 533.6
+      },
+      "destino": {
+        "id": 65,
+        "x": 208.8,
+        "y": 501.6
       },
       "peso": 50,
       "isClosed": false,

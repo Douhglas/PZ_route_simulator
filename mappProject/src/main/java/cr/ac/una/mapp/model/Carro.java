@@ -44,6 +44,12 @@ public class Carro {
     private List<Arista> caminoOriginal;
     private List<Arista> caminoRecorrido;
 
+    private double costoTotalTiempo = 0;
+    private double costoTotalPeso = 0;
+    private static final double COSTO_POR_SEGUNDO = 0.5;
+    private static final double COSTO_POR_PESO = 1.0;
+
+
     public Carro(AnchorPane anchorPane) {
         caminoOriginal =  new ArrayList<>();
         caminoRecorrido =  new ArrayList<>();
@@ -60,6 +66,17 @@ public class Carro {
     }
 
     public void crearSimulacion(Arista arista, int tiempoAnimacion) {
+
+        double costoPeso = arista.getPeso() * COSTO_POR_PESO;
+        costoTotalPeso += costoPeso;
+
+        System.out.println("Costo actual por peso: " + costoPeso + ". Costo total acumulado por peso: " + costoTotalPeso);
+
+        double costoTiempo = tiempoAnimacion * COSTO_POR_SEGUNDO;
+        costoTotalTiempo += costoTiempo;
+
+        System.out.println("Costo actual por tiempo: " + costoTiempo + ". Costo total acumulado por tiempo: " + costoTotalTiempo);
+
         caminoRecorrido.add(arista);
         anchorPane.getChildren().remove(carroImageView);
 
@@ -101,11 +118,9 @@ public class Carro {
         pathTransition.setDuration(Duration.seconds(tiempoAnimacion));
         pathTransition.setCycleCount(1);
 
-        // Agregar el carro al AnchorPane
         anchorPane.getChildren().add(carroImageView);
         pathTransition.play();
 
-        // Cuando finalice la transición
         pathTransition.setOnFinished(event -> {
             if (origen != destino) {
                 List<Arista> camino;
@@ -117,25 +132,26 @@ public class Carro {
                     camino = grafo.floydWarshall(origen, destino);
                 }
 
-                // Validar si el camino contiene solo aristas cerradas
                 if (camino == null || camino.isEmpty() || camino.stream().allMatch(Arista::getIsClosed)) {
-                    mostrarAlertaNoHayCamino();
-                    regresarANodoAnterior(tiempoAnimacion);
+                    System.out.println("No se encontró un camino desde el nodo actual. Intentando desde nodos anteriores...");
+                    intentarDesdeNodosAnteriores(tiempoAnimacion);
                     return;
                 }
 
-                // Obtener la siguiente arista disponible que no esté cerrada
                 Arista siguienteArista = camino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
 
                 if (siguienteArista == null) {
-                    mostrarAlertaNoHayCamino();
-                    regresarANodoAnterior(tiempoAnimacion);
+                    System.out.println("No se encontró una arista abierta desde el nodo actual. Intentando desde nodos anteriores...");
+                    intentarDesdeNodosAnteriores(tiempoAnimacion);
                     return;
                 }
 
                 crearSimulacion(siguienteArista, tiempoAnimacion);
+            } else {
+                mostrarCostoFinal();
             }
         });
+
     }
 
     private void mostrarAlertaNoHayCamino() {
@@ -148,38 +164,19 @@ public class Carro {
         });
     }
 
+    private void intentarDesdeNodosAnteriores(int tiempoAnimacion) {
 
-    private void regresarANodoAnterior(int tiempoAnimacion) {
-        if (caminoRecorrido.size() < 2) {
-            mostrarAlertaNoHayCamino();
+        if (origen == destino) {
+            System.out.println("El vehículo ya está en el destino. Mostrando costo final...");
+            mostrarCostoFinal();
             return;
         }
 
-        Arista ultimaArista = caminoRecorrido.get(caminoRecorrido.size() - 1);
-        Arista aristaAnterior = caminoRecorrido.get(caminoRecorrido.size() - 1);
+        while (!caminoRecorrido.isEmpty()) {
+            Arista ultimaArista = caminoRecorrido.remove(caminoRecorrido.size() - 1);
+            origen = ultimaArista.getOrigen().getId();
 
-        Line rutaDeRegreso = new Line();
-        rutaDeRegreso.setStartX(ultimaArista.getDestino().getX());
-        rutaDeRegreso.setStartY(ultimaArista.getDestino().getY());
-        rutaDeRegreso.setEndX(aristaAnterior.getOrigen().getX());
-        rutaDeRegreso.setEndY(aristaAnterior.getOrigen().getY());
-
-        rotarCarro(aristaAnterior);
-
-        if (!anchorPane.getChildren().contains(carroImageView)) {
-            anchorPane.getChildren().add(carroImageView);
-        }
-
-        pathTransition = new PathTransition();
-        pathTransition.setNode(carroImageView);
-        pathTransition.setPath(rutaDeRegreso);
-        pathTransition.setDuration(Duration.seconds(tiempoAnimacion));
-        pathTransition.setCycleCount(1);
-        pathTransition.play();
-
-        pathTransition.setOnFinished(event -> {
-            origen = aristaAnterior.getOrigen().getId();
-            caminoRecorrido.remove(ultimaArista);
+            System.out.println("Retrocediendo al nodo: " + origen);
 
             List<Arista> nuevoCamino;
             if (grafo.isUsingDijkstra) {
@@ -188,19 +185,21 @@ public class Carro {
                 nuevoCamino = grafo.floydWarshall(origen, destino);
             }
 
-            if (nuevoCamino == null || nuevoCamino.isEmpty() || nuevoCamino.stream().allMatch(Arista::getIsClosed)) {
-                mostrarAlertaNoHayCamino();
-                regresarANodoAnterior(tiempoAnimacion);
-            } else {
+            if (nuevoCamino != null && !nuevoCamino.isEmpty() && nuevoCamino.stream().anyMatch(ar -> !ar.getIsClosed())) {
+                System.out.println("Nuevo camino encontrado desde el nodo: " + origen);
                 Arista siguienteArista = nuevoCamino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
+
                 if (siguienteArista != null) {
                     crearSimulacion(siguienteArista, tiempoAnimacion);
-                } else {
-                    mostrarAlertaNoHayCamino();
-                    regresarANodoAnterior(tiempoAnimacion);
+                    return;
                 }
+            } else {
+                System.out.println("No se encontró un camino desde el nodo: " + origen);
             }
-        });
+        }
+
+        mostrarAlertaNoHayCamino();
+        mostrarCostoFinal();
     }
 
     public void rotarCarro(Arista arista) {
@@ -234,4 +233,25 @@ public class Carro {
     public void setDestino(Integer destino) {
         this.destino = destino;
     }
+
+    private void mostrarCostoFinal() {
+        double costoTotal = costoTotalTiempo + costoTotalPeso;
+
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Costo del recorrido");
+            alert.setHeaderText("Recorrido finalizado");
+            alert.setContentText(
+                    "Costo total por peso: " + costoTotalPeso + "\n" +
+                            "Costo total por tiempo: " + costoTotalTiempo + "\n" +
+                            "Costo total del recorrido: " + costoTotal
+            );
+            alert.showAndWait();
+        });
+
+        costoTotalTiempo = 0;
+        costoTotalPeso = 0;
+    }
+
+
 }
