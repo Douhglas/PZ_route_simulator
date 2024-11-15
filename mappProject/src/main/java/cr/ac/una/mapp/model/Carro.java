@@ -71,13 +71,12 @@ public class Carro {
         rotarCarro(arista);
 
         Line rastro = new Line();
-        rastro.setStroke(Color.ORANGERED);
+        rastro.setStroke(Color.TRANSPARENT);
         rastro.setStrokeWidth(2);
         rastro.setStartX(ruta.getStartX());
         rastro.setStartY(ruta.getStartY());
         anchorPane.getChildren().add(rastro);
 
-        // Configurar la animación del rastro
         Transition rastroAnimation = new Transition() {
             {
                 setCycleDuration(Duration.seconds(tiempoAnimacion));
@@ -85,15 +84,17 @@ public class Carro {
 
             @Override
             protected void interpolate(double frac) {
+               
                 double x = ruta.getStartX() + frac * (ruta.getEndX() - ruta.getStartX());
                 double y = ruta.getStartY() + frac * (ruta.getEndY() - ruta.getStartY());
                 rastro.setEndX(x);
                 rastro.setEndY(y);
+                rastro.setStroke(Color.ORANGERED);
             }
         };
         rastroAnimation.play();
+        
 
-        // Configurar la transición del carro
         pathTransition = new PathTransition();
         pathTransition.setNode(carroImageView);
         pathTransition.setPath(ruta);

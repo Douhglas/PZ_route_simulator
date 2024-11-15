@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -34,6 +36,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -54,6 +57,8 @@ public class MainMapController extends Controller implements Initializable {
     @FXML
     private CheckBox checkBoxCerrado;
 
+     private double xOffset = 0;
+    private double yOffset = 0;
 
     private List<Vertice> vertices = new ArrayList<>();
     private List<Arista> aristas = new ArrayList<>();
@@ -94,7 +99,8 @@ public class MainMapController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+          //  agregarBarraDeTitulo();
+ 
     }
 
     @Override
@@ -126,8 +132,7 @@ public class MainMapController extends Controller implements Initializable {
                 seleccionarLinea(lineaCercana);
             }
         });
-
-
+ 
     }
 
     private void seleccionarLinea(Line linea) {
@@ -505,6 +510,51 @@ public class MainMapController extends Controller implements Initializable {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
+    
+    private void agregarBarraDeTitulo() {
+        // Crear la barra de título
+        HBox titleBar = new HBox();
+        titleBar.setStyle("-fx-background-color: #2c3e50; -fx-padding: 5px;");
+        titleBar.setAlignment(Pos.CENTER_RIGHT);
+        titleBar.setPrefHeight(30);
+
+        // Crear el botón de minimizar
+        Button minimizeButton = new Button("_");
+        minimizeButton.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;");
+        minimizeButton.setOnAction(event -> {
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.setIconified(true);
+        });
+
+        // Crear el botón de cerrar
+        Button closeButton = new Button("X");
+        closeButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;");
+        closeButton.setOnAction(event -> {
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.close();
+        });
+
+        // Agregar botones a la barra de título
+        titleBar.getChildren().addAll(minimizeButton, closeButton);
+
+        // Permitir arrastrar la ventana desde la barra de título
+        titleBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+
+        // Añadir la barra de título al `AnchorPane`
+        root.getChildren().add(titleBar);
+        AnchorPane.setTopAnchor(titleBar, 0.0);
+        AnchorPane.setLeftAnchor(titleBar, 0.0);
+        AnchorPane.setRightAnchor(titleBar, 0.0);
+    }
 
 
 }
