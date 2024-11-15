@@ -54,7 +54,7 @@
 
                         <Separator prefWidth="200" />
 
-                        <Button fx:id="btnInfo" onAction="#onActionAbrirInfo" prefWidth="200" text="Mostrar Matriz de Adyacencia" />
+                        <Button fx:id="btnInfo" onAction="#onActionNuevaRuta" prefWidth="200" text="Nueva Ruta" />
 
                     </children>
                 </VBox>

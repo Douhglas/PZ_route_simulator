@@ -322,5 +322,31 @@ public class Carro {
         costoTotalPeso = 0;
     }
 
+    public void limpiarRastro() {
+        System.out.println("Limpiando el rastro del carro...");
+        // Eliminar líneas y el carro del AnchorPane
+        anchorPane.getChildren().remove(carroImageView);
+        // Aquí puedes limpiar cualquier otra cosa que el carro haya dibujado
+    }
+
+    public void limpiarRecorrido() {
+        System.out.println("Limpiando el recorrido del carro...");
+
+        // Eliminar todas las líneas dibujadas por el carro
+        anchorPane.getChildren().removeIf(node -> node instanceof Line);
+
+        // Eliminar el vehículo (carro)
+        anchorPane.getChildren().remove(carroImageView);
+
+        // Reiniciar lista de camino recorrido
+        caminoRecorrido.clear();
+
+        // Reiniciar costos acumulados
+        costoTotalPeso = 0;
+        costoTotalTiempo = 0;
+
+        System.out.println("Recorrido y costos reiniciados.");
+    }
+
 
 }

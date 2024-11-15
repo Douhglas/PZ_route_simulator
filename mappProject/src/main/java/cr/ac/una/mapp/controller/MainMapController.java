@@ -542,21 +542,22 @@ public class MainMapController extends Controller implements Initializable {
 
 
     @FXML
-    void onActionAbrirInfo(ActionEvent event) {
-//        System.out.println("Cambiando...");
-//
-//        for (Arista arista : grafo.getAristas()) {
-//            System.out.println("Aristas antes: " + arista.getPeso());
-//        }
-//        grafo.mostrarMatrizAdyacenciaActual();
-//        grafo.matrizAdyacencia.get(1).get(2).setPeso(2000);
-//        for (Arista arista : grafo.getAristas()) {
-//            System.out.println("Aristas después: " + arista.getPeso());
-//        }
-//        grafo.mostrarMatrizAdyacenciaActual();
-//        AppContext.getInstance().set("grafo", grafo);
-grafo.mostrarMatrizAdyacenciaActual();
+    void onActionNuevaRuta(ActionEvent event) {
+        System.out.println("Iniciando limpieza para nueva ruta...");
+
+        // Limpiar la ruta inicial trazada en el mapa
+        clearPath();
+
+        // Limpiar el recorrido y trazo del carro
+        carro.limpiarRecorrido();
+
+        // Reiniciar variables de origen y destino
+        origen = null;
+        destino = null;
+
+        System.out.println("Limpieza completada. Listo para definir una nueva ruta.");
     }
+
 
     @FXML
     void onActionGuardarCambios(ActionEvent event) {
