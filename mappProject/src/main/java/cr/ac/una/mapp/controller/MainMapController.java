@@ -54,6 +54,7 @@ public class MainMapController extends Controller implements Initializable {
     @FXML
     private CheckBox checkBoxCerrado;
 
+    private List<Line> lineasRuta = new ArrayList<>();
 
     private List<Vertice> vertices = new ArrayList<>();
     private List<Arista> aristas = new ArrayList<>();
@@ -131,22 +132,19 @@ public class MainMapController extends Controller implements Initializable {
     }
 
     private void seleccionarLinea(Line linea) {
-        if (linea == lineaSeleccionada) {
+        if (lineaSeleccionada != null) {
+            // Desselecciona la línea previamente seleccionada
             lineaSeleccionada.setStroke(Color.TRANSPARENT);
-            lineaSeleccionada.setStrokeWidth(2);
-            lineaSeleccionada = null;
-        } else {
-            if (lineaSeleccionada != null) {
-                lineaSeleccionada.setStroke(Color.TRANSPARENT);
-                lineaSeleccionada.setStrokeWidth(2);
-            }
+        }
 
-            lineaSeleccionada = linea;
+        lineaSeleccionada = linea;
+
+        if (lineaSeleccionada != null) {
             lineaSeleccionada.setStroke(Color.YELLOW);
-            lineaSeleccionada.setStrokeWidth(3);
-            System.out.printf("Arista seleccionada: " + linea.getUserData().toString());
+            lineaSeleccionada.toFront();
         }
     }
+
 
     private void colocarCirculo(Vertice vertice) {
 
@@ -349,11 +347,8 @@ public class MainMapController extends Controller implements Initializable {
     }
 
     public void drawPath(List<Arista> aristas) {
-
-        clearPath();
+        clearPath(); // Limpia solo la lista lineasRuta
         for (Arista arista : aristas) {
-
-
             Line line = new Line();
             line.setStrokeWidth(4);
             line.setStartX(arista.getOrigen().getX());
@@ -363,16 +358,18 @@ public class MainMapController extends Controller implements Initializable {
             line.setStroke(Color.BLUE);
 
             root.getChildren().add(line);
-            lineas.add(line);
+            lineasRuta.add(line);
         }
     }
 
+
     public void clearPath() {
-        for (Line line : lineas) {
+        for (Line line : lineasRuta) {
             root.getChildren().remove(line);
         }
-        lineas.clear();
+        lineasRuta.clear();
     }
+
 
 
     @FXML
@@ -454,7 +451,7 @@ public class MainMapController extends Controller implements Initializable {
         int nuevoNivelTrafico = (int) spinnerTrafico.getValue();
         boolean isClosed = checkBoxCerrado.isSelected();
 
-        aristaSeleccionada.setLongitud(22);
+        aristaSeleccionada.setLongitud(1000);
         aristaSeleccionada.setNivelTrafico(nuevoNivelTrafico);
         aristaSeleccionada.setIsClosed(isClosed);
         aristaSeleccionada.setPeso(aristaSeleccionada.getLongitud() * nuevoNivelTrafico);
@@ -465,6 +462,9 @@ public class MainMapController extends Controller implements Initializable {
 
         System.out.println("Arista modificada: " + aristaSeleccionada);
         grafo.mostrarMatrizAdyacenciaActual();
+
+        lineaSeleccionada.setStroke(Color.TRANSPARENT);
+        lineaSeleccionada = null;
 
         AppContext.getInstance().set("grafo", grafo);
     }
