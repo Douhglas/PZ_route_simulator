@@ -9,6 +9,8 @@ import java.util.List;
 import cr.ac.una.mapp.controller.MainMapController;
 import cr.ac.una.mapp.util.AppContext;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -122,35 +124,57 @@ public class Carro {
         pathTransition.play();
 
         pathTransition.setOnFinished(event -> {
-            if (origen != destino) {
-                List<Arista> camino;
-                origen = siguienteNodo;
+            System.out.println("Evento de transición finalizado. Verificando estado...");
+            System.out.println("Origen actual: " + origen + ", Destino final: " + destino);
 
-                if (grafo.isUsingDijkstra) {
-                    camino = grafo.dijkstra(origen, destino);
-                } else {
-                    camino = grafo.floydWarshall(origen, destino);
-                }
-
-                if (camino == null || camino.isEmpty() || camino.stream().allMatch(Arista::getIsClosed)) {
-                    System.out.println("No se encontró un camino desde el nodo actual. Intentando desde nodos anteriores...");
-                    intentarDesdeNodosAnteriores(tiempoAnimacion);
-                    return;
-                }
-
-                Arista siguienteArista = camino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
-
-                if (siguienteArista == null) {
-                    System.out.println("No se encontró una arista abierta desde el nodo actual. Intentando desde nodos anteriores...");
-                    intentarDesdeNodosAnteriores(tiempoAnimacion);
-                    return;
-                }
-
-                crearSimulacion(siguienteArista, tiempoAnimacion);
-            } else {
+            if (origen == destino) {
+                System.out.println("El vehículo ha llegado al destino. Mostrando costo final...");
                 mostrarCostoFinal();
+                return;
             }
+
+            List<Arista> camino;
+            origen = siguienteNodo;
+
+            System.out.println("Intentando encontrar un camino desde el nodo: " + origen + " al nodo destino: " + destino);
+
+            if (grafo.isUsingDijkstra) {
+                camino = grafo.dijkstra(origen, destino);
+            } else {
+                camino = grafo.floydWarshall(origen, destino);
+            }
+
+            if (camino == null || camino.isEmpty() || camino.stream().allMatch(Arista::getIsClosed)) {
+                if (Objects.equals(origen, destino)) {
+                    System.out.println("El vehículo ya está en el destino. Mostrando costo final...");
+                    mostrarCostoFinal();
+                    return;
+                }
+
+                System.out.println("No se encontró un camino válido. Deteniendo para esperar...");
+                esperarYReintentar(15, tiempoAnimacion); 
+                return;
+            }
+
+            Arista siguienteArista = camino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
+
+            if (siguienteArista == null) {
+                if (origen == destino) {
+                    System.out.println("El vehículo ya está en el destino. Mostrando costo final...");
+                    mostrarCostoFinal();
+                    return;
+                }
+
+                System.out.println("No se encontró una arista abierta desde el nodo actual. Deteniendo para esperar...");
+                esperarYReintentar(15, tiempoAnimacion);
+                return;
+            }
+
+            System.out.println("Ruta encontrada: De " + siguienteArista.getOrigen().getId() + " a " + siguienteArista.getDestino().getId());
+            crearSimulacion(siguienteArista, tiempoAnimacion);
         });
+
+
 
     }
 
@@ -202,6 +226,48 @@ public class Carro {
         mostrarCostoFinal();
     }
 
+    private void esperarYReintentar(int tiempoDeEspera, int tiempoAnimacion) {
+        System.out.println("El vehículo está detenido. Esperando que se habilite alguna carretera...");
+
+        new Thread(() -> {
+            int tiempoTranscurrido = 0;
+            boolean caminoHabilitado = false;
+
+            while (tiempoTranscurrido < tiempoDeEspera && !caminoHabilitado) {
+                try {
+                    Thread.sleep(1000);
+                    tiempoTranscurrido++;
+                    System.out.println("Tiempo transcurrido en espera: " + tiempoTranscurrido + " segundos.");
+
+                    List<Arista> camino;
+                    if (grafo.isUsingDijkstra) {
+                        camino = grafo.dijkstra(origen, destino);
+                    } else {
+                        camino = grafo.floydWarshall(origen, destino);
+                    }
+
+                    if (camino != null && camino.stream().anyMatch(ar -> !ar.getIsClosed())) {
+                        caminoHabilitado = true;
+                        System.out.println("Se habilitó una carretera. Reanudando el viaje...");
+                        Arista siguienteArista = camino.stream().filter(ar -> !ar.getIsClosed()).findFirst().orElse(null);
+                        if (siguienteArista != null) {
+                            Platform.runLater(() -> crearSimulacion(siguienteArista, tiempoAnimacion));
+                        }
+                        return;
+                    }
+                } catch (InterruptedException e) {
+                    System.err.println("Error en la espera: " + e.getMessage());
+                }
+            }
+
+            if (!caminoHabilitado) {
+                System.out.println("No se habilitó ninguna carretera después de " + tiempoDeEspera + " segundos. Iniciando retroceso...");
+                Platform.runLater(() -> intentarDesdeNodosAnteriores(tiempoAnimacion));
+            }
+        }).start();
+    }
+
+
     public void rotarCarro(Arista arista) {
         double deltaX = arista.getDestino().getX() - arista.getOrigen().getX();
         double deltaY = arista.getDestino().getY() - arista.getOrigen().getY();
@@ -242,8 +308,6 @@ public class Carro {
             alert.setTitle("Costo del recorrido");
             alert.setHeaderText("Recorrido finalizado");
             alert.setContentText(
-                    "Costo total por peso: " + costoTotalPeso + "\n" +
-                            "Costo total por tiempo: " + costoTotalTiempo + "\n" +
                             "Costo total del recorrido: " + costoTotal
             );
             alert.showAndWait();

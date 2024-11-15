@@ -568,7 +568,7 @@ grafo.mostrarMatrizAdyacenciaActual();
         Arista aristaSeleccionada = (Arista) lineaSeleccionada.getUserData();
 
         System.out.println("Arista antes: " + aristaSeleccionada);
-        grafo.mostrarMatrizAdyacenciaActual();
+        //grafo.mostrarMatrizAdyacenciaActual();
 
         int nuevoNivelTrafico = (int) spinnerTrafico.getValue();
         boolean isClosed = checkBoxCerrado.isSelected();

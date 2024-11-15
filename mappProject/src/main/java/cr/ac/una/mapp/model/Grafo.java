@@ -231,9 +231,9 @@ public class Grafo {
         }
 
         if (aristas.isEmpty()) {
-            System.out.println("crearCamino: No se encontraron aristas para el camino proporcionado.");
+            //System.out.println("crearCamino: No se encontraron aristas para el camino proporcionado.");
         } else {
-            System.out.println("crearCamino: Aristas resultantes del camino: " + aristas);
+            //System.out.println("crearCamino: Aristas resultantes del camino: " + aristas);
         }
 
         return aristas;
