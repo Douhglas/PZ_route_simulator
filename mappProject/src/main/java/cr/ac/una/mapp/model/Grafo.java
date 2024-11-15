@@ -95,12 +95,13 @@ public class Grafo {
             int actualId = actual.getId();
 
             if (actualId == destinoId) {
-                List<Integer> caminoInteger =  reconstruirCaminoDjikstra(predecesores, origenId, destinoId);
+                List<Integer> caminoInteger = reconstruirCaminoDjikstra(predecesores, origenId, destinoId);
                 return crearCamino(caminoInteger);
             }
 
             for (Arista arista : matrizAdyacencia.get(actualId)) {
-                if (arista != null) {
+                // Verificar si la arista está cerrada antes de procesarla
+                if (arista != null && !arista.getIsClosed()) {
                     int vecinoId = arista.getDestino().getId();
                     int nuevaDistancia = distancias[actualId] + arista.getPeso();
 
@@ -115,6 +116,7 @@ public class Grafo {
 
         return null;
     }
+
 
 
     public List<Arista> floydWarshall(int origen, int destino) {
@@ -136,8 +138,9 @@ public class Grafo {
 
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
-                if (matrizAdyacencia.get(i).get(j) != null) {
-                    dist[i][j] = matrizAdyacencia.get(i).get(j).getPeso();
+                Arista arista = matrizAdyacencia.get(i).get(j);
+                if (arista != null && !arista.getIsClosed()) {
+                    dist[i][j] = arista.getPeso();
                     predecesor[i][j] = i;
                 }
             }
@@ -146,7 +149,6 @@ public class Grafo {
         for (int k = 0; k < numVertices; k++) {
             for (int i = 0; i < numVertices; i++) {
                 for (int j = 0; j < numVertices; j++) {
-
                     if (dist[i][k] != Integer.MAX_VALUE && dist[k][j] != Integer.MAX_VALUE
                             && dist[i][j] > dist[i][k] + dist[k][j]) {
                         dist[i][j] = dist[i][k] + dist[k][j];
@@ -155,12 +157,14 @@ public class Grafo {
                 }
             }
         }
+
         List<Integer> camino = obtenerCamino(origen, destino);
-        if(camino == null){
+        if (camino == null) {
             return null;
         }
         return crearCamino(camino);
     }
+
 
     public List<Integer> obtenerCamino(int origenId, int destinoId) {
         List<Integer> camino = new ArrayList<>();
